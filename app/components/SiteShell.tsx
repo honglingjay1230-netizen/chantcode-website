@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import { SITE } from "../config";
 
@@ -32,26 +31,26 @@ export function SiteShell({ children }: { children: ReactNode }) {
   return (
     <div className="site-shell">
       <header className="site-header">
-        <Link className="brand" href="/" aria-label="ChantCode home"><RhythmMark small /><BrandLogo /></Link>
+        <a className="brand" href="/" aria-label="ChantCode home"><RhythmMark small /><BrandLogo /></a>
         <nav aria-label="Primary navigation">
-          {links.map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}
+          {links.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
         </nav>
       </header>
       {children}
       <footer className="site-footer">
-        <div className="footer-brand"><Link className="brand" href="/" aria-label="ChantCode home"><RhythmMark small /><BrandLogo /></Link><p>Rhythm · Memory · Recall</p></div>
+        <div className="footer-brand"><a className="brand" href="/" aria-label="ChantCode home"><RhythmMark small /><BrandLogo /></a><p>Rhythm · Memory · Recall</p></div>
         <div className="footer-contact"><span>Contact</span><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></div>
         <nav aria-label="Footer navigation">
-          <Link href="/method">Method</Link>
-          <Link href="/about">About</Link>
-          <Link href="/learning">Learning Structure</Link>
-          <Link href="/book">Book</Link>
-          <Link href="/app">App</Link>
-          <Link href="/faq">FAQ</Link>
-          <Link href="/parents">Parent Guide</Link>
-          <Link href="/privacy">Privacy Policy</Link>
-          <Link href="/terms">Terms of Use</Link>
-          <Link href="/support">Support</Link>
+          <a href="/method">Method</a>
+          <a href="/about">About</a>
+          <a href="/learning">Learning Structure</a>
+          <a href="/book">Book</a>
+          <a href="/app">App</a>
+          <a href="/faq">FAQ</a>
+          <a href="/parents">Parent Guide</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Use</a>
+          <a href="/support">Support</a>
         </nav>
         <p className="copyright">© 2026 ChantCode. All rights reserved.</p>
       </footer>

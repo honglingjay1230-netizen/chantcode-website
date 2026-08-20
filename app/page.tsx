@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { SiteShell } from "./components/SiteShell";
 import { StoreButtons } from "./components/StoreButtons";
 
@@ -27,7 +26,7 @@ export default function Home() {
             <p className="knowledge-lede">ChantCode uses rhythmic multiplication chants to help children build multiplication fact fluency and recall multiplication facts more naturally.</p>
             <p>A <strong>chant</strong> turns information into a short sequence that can be repeated from memory. A <strong>code</strong> stores information in a compact form so it can be retrieved when needed.</p>
             <p className="hero-principle"><strong>Listen to the pattern. Store the fact. Retrieve the answer.</strong></p>
-            <div className="hero-actions"><Link className="primary-button" href="/about">What is ChantCode?</Link><Link className="secondary-button" href="/method">How it works</Link></div>
+            <div className="hero-actions"><a className="primary-button" href="/about">What is ChantCode?</a><a className="secondary-button" href="/method">How it works</a></div>
           </div>
           <div className="hero-visual"><div className="icon-halo"><img src="/chantcode-app-icon.png" alt="ChantCode Multiplication app icon" /></div><img className="concept-image" src="/chantcode-automaticity-formula.png" alt="Memorize ChantCode times retrieval practice equals multiplication automaticity" /></div>
         </section>
@@ -39,7 +38,7 @@ export default function Home() {
 
         <section className="section fact-section">
           <div><p className="eyebrow">A Compact Learning Structure</p><h2>36 core multiplication facts</h2></div>
-          <div><p>The 1s facts and repeated commutative pairs can be removed from concentrated memorization. This leaves 36 core facts across the 2s through 9s.</p><p>ChantCode organizes those facts into compact sound patterns, then uses recall practice to help children retrieve answers more directly.</p><Link className="primary-link" href="/learning">Explore the learning structure <span aria-hidden="true">→</span></Link></div>
+          <div><p>The 1s facts and repeated commutative pairs can be removed from concentrated memorization. This leaves 36 core facts across the 2s through 9s.</p><p>ChantCode organizes those facts into compact sound patterns, then uses recall practice to help children retrieve answers more directly.</p><a className="primary-link" href="/learning">Explore the learning structure <span aria-hidden="true">→</span></a></div>
         </section>
 
         <section className="section reassurance-section">
@@ -48,7 +47,7 @@ export default function Home() {
         </section>
 
         <section className="section app-intro-section">
-          <div><p className="eyebrow">The ChantCode App</p><h2>Structured multiplication practice for children</h2><p>The app brings together rhythmic chants, visual guidance, prompted recall, independent recall, and practice challenges in one focused learning sequence.</p><Link className="primary-link" href="/app">Learn about the app <span aria-hidden="true">→</span></Link></div>
+          <div><p className="eyebrow">The ChantCode App</p><h2>Structured multiplication practice for children</h2><p>The app brings together rhythmic chants, visual guidance, prompted recall, independent recall, and practice challenges in one focused learning sequence.</p><a className="primary-link" href="/app">Learn about the app <span aria-hidden="true">→</span></a></div>
           <div><img src="/chantcode-app-icon.png" alt="ChantCode Multiplication app icon" /><p>Available on</p><StoreButtons compact /></div>
         </section>
       </main>
