@@ -11,15 +11,17 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <LegalPage title="Privacy Policy">
-      <p><strong>Last updated: August 21, 2026.</strong> ChantCode is designed for children and families with a data-minimizing approach.</p>
-      <section><h2>No Account Required</h2><p>The core ChantCode experience does not require an account. ChantCode does not ask children to provide a name, email address, profile, or password.</p></section>
-      <section><h2>Personal Information</h2><p>ChantCode does not collect a child&apos;s name or precise location, and it does not upload the child&apos;s learning record to a ChantCode server.</p></section>
-      <section><h2>Learning Progress</h2><p>Learning progress and preferences are stored locally on the device. Removing the app or clearing its local data may remove that progress.</p></section>
-      <section><h2>Audio and Video</h2><p>Chant recordings, music, sound effects, and videos are provided as learning media. The app does not require a child to record or upload their own voice, photo, or video for the core experience.</p></section>
-      <section><h2>Purchases</h2><p>If paid content becomes available, purchases are processed by the applicable app store. ChantCode does not directly receive or store payment-card details. Store purchase records are governed by the store provider&apos;s terms and privacy policy.</p></section>
-      <section><h2>Advertising and Third-Party Services</h2><p>ChantCode does not include advertising or behavioral advertising. The core app is designed without third-party account, analytics, or advertising services. Any future service that changes data handling will be reviewed and disclosed in this policy before use.</p></section>
-      <section><h2>Changes to This Policy</h2><p>We may update this policy as ChantCode develops. The latest version will be published on this page with a revised update date.</p></section>
-      <section><h2>Contact</h2><p>Questions about this policy can be sent to <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p></section>
+      <p><strong>Last updated: August 21, 2026.</strong></p>
+      <section><h2>Privacy Overview</h2><p>ChantCode respects children&apos;s privacy. The app is designed for learning multiplication facts and does not collect unnecessary personal information.</p></section>
+      <section><h2>Data Collection</h2><p>ChantCode does not collect names, email addresses, location data, contacts, photos or videos, camera data, microphone data, or personal identifiers.</p></section>
+      <section><h2>Learning Data</h2><p>Learning progress, test results, and completion status are stored locally on the user&apos;s device.</p><p>ChantCode does not upload, share, sell, or transmit children&apos;s learning data.</p></section>
+      <section><h2>Audio and Video</h2><p>Chant recordings, songs, sound effects, and videos are learning resources provided by the app. ChantCode does not record or upload a child&apos;s voice, photos, or videos.</p></section>
+      <section><h2>Third-Party Services</h2><p>ChantCode does not use third-party advertising, behavioral tracking, or analytics services that collect children&apos;s personal information.</p></section>
+      <section><h2>Children&apos;s Privacy</h2><p>ChantCode is designed for children. The app does not require children to create accounts or provide personal information.</p></section>
+      <section><h2>Data Deletion</h2><p>Users can delete locally stored learning data through <strong>Settings → Reset Learning Progress</strong>.</p><p>Deleting the app will also remove locally stored learning data.</p></section>
+      <section><h2>Purchases</h2><p>ChantCode Full Version is available through Apple App Store In-App Purchase. All payments are processed by Apple. ChantCode does not receive or store payment information.</p><p>Users can restore previous purchases through their Apple account using the restore-purchase option in the app.</p></section>
+      <section><h2>Changes to This Policy</h2><p>We may update this policy if ChantCode&apos;s features or data practices change. The latest version will be published on this page with a revised update date.</p></section>
+      <section><h2>Contact</h2><p>For questions, technical support, or privacy requests, contact <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p></section>
     </LegalPage>
   );
 }

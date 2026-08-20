@@ -228,6 +228,8 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
 .support-hero { margin-bottom: 50px; }
 .faq-list { display: grid; gap: 16px; }
 .faq-list article { padding: 28px 30px 16px; border: 1px solid var(--line); border-radius: 22px; }
+.legal-links { max-width: 780px; margin: 34px auto 0; padding-top: 22px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 24px; }
+.legal-links a { color: var(--muted); font-size: 0.92rem; font-weight: 700; }
 .contact-card { max-width: 920px; display: flex; align-items: center; justify-content: space-between; gap: 30px; margin: 70px auto 0; padding: 42px; border-radius: var(--radius-md); background: #eef5ff; }
 .contact-card p { margin-bottom: 0; }
 
