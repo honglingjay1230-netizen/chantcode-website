@@ -35,3 +35,5 @@ npm test
 6. Verify `/`, `/privacy`, `/support`, `/robots.txt`, and `/sitemap.xml` on the public domain before App Store submission.
 
 No D1 or R2 binding is required. App Store and Google Play links remain disabled until verified public listings exist.
+
+The production build is validated with `npm test` before each saved deployment version.
