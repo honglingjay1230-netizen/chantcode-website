@@ -34,3 +34,11 @@ export function mainlandChinaNotFoundResponse() {
     },
   });
 }
+
+export async function onRequest(context) {
+  if (shouldHideFromRequest(context.request)) {
+    return mainlandChinaNotFoundResponse();
+  }
+
+  return await context.next();
+}

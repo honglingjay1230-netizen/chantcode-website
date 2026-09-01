@@ -65,9 +65,9 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
   assert.equal(slugs.length, 8);
 });
 
-test("production worker returns a real 404 only for mainland China traffic", async () => {
-  const workerModule = await import(new URL("../worker/country-block.js", import.meta.url));
-  const { mainlandChinaNotFoundResponse, shouldHideFromRequest } = workerModule;
+test("Pages middleware returns a real 404 only for mainland China traffic", async () => {
+  const middleware = await import(new URL("../functions/_middleware.js", import.meta.url));
+  const { mainlandChinaNotFoundResponse, onRequest, shouldHideFromRequest } = middleware;
 
   assert.equal(shouldHideFromRequest({ cf: { country: "CN" } }), true);
   assert.equal(shouldHideFromRequest({ cf: { country: "US" } }), false);
@@ -77,6 +77,21 @@ test("production worker returns a real 404 only for mainland China traffic", asy
   assert.equal(chinaResponse.status, 404);
   assert.match(await chinaResponse.text(), /Page not found\./);
   assert.equal(chinaResponse.headers.get("x-robots-tag"), "noindex, nofollow");
+
+  let nextCalls = 0;
+  const publicResponse = await onRequest({
+    request: { cf: { country: "US" } },
+    next: async () => {
+      nextCalls += 1;
+      return new Response("public", { status: 200 });
+    },
+  });
+  assert.equal(publicResponse.status, 200);
+  assert.equal(await publicResponse.text(), "public");
+  assert.equal(nextCalls, 1);
+
+  const routes = JSON.parse(await readFile(new URL("dist/client/_routes.json", root), "utf8"));
+  assert.deepEqual(routes, { version: 1, include: ["/*"], exclude: [] });
 });
 
 test("evidence pages keep source limits visible in HTML", async () => {
