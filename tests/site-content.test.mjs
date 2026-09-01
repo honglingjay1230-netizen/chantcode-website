@@ -65,31 +65,18 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
   assert.equal(slugs.length, 8);
 });
 
-test("Pages worker returns a real 404 only for mainland China traffic", async () => {
-  const workerModule = await import(new URL("../public/_worker.js", import.meta.url));
-  const worker = workerModule.default;
+test("production worker returns a real 404 only for mainland China traffic", async () => {
+  const workerModule = await import(new URL("../worker/country-block.js", import.meta.url));
+  const { mainlandChinaNotFoundResponse, shouldHideFromRequest } = workerModule;
 
-  const chinaResponse = await worker.fetch(
-    { cf: { country: "CN" } },
-    { ASSETS: { fetch: () => assert.fail("CN traffic must not reach site assets") } },
-  );
+  assert.equal(shouldHideFromRequest({ cf: { country: "CN" } }), true);
+  assert.equal(shouldHideFromRequest({ cf: { country: "US" } }), false);
+  assert.equal(shouldHideFromRequest({}), false);
+
+  const chinaResponse = mainlandChinaNotFoundResponse();
   assert.equal(chinaResponse.status, 404);
   assert.match(await chinaResponse.text(), /Page not found\./);
   assert.equal(chinaResponse.headers.get("x-robots-tag"), "noindex, nofollow");
-
-  const assetResponse = new Response("site", { status: 200 });
-  const foreignRequest = { cf: { country: "US" } };
-  let forwardedRequest;
-  const foreignResponse = await worker.fetch(foreignRequest, {
-    ASSETS: {
-      fetch(request) {
-        forwardedRequest = request;
-        return assetResponse;
-      },
-    },
-  });
-  assert.equal(forwardedRequest, foreignRequest);
-  assert.equal(foreignResponse, assetResponse);
 });
 
 test("evidence pages keep source limits visible in HTML", async () => {

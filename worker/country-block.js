@@ -20,19 +20,17 @@ const mainlandChinaNotFound = `<!doctype html>
 </body>
 </html>`;
 
-export default {
-  async fetch(request, env) {
-    if (request.cf?.country === "CN") {
-      return new Response(mainlandChinaNotFound, {
-        status: 404,
-        headers: {
-          "Cache-Control": "no-store",
-          "Content-Type": "text/html; charset=UTF-8",
-          "X-Robots-Tag": "noindex, nofollow",
-        },
-      });
-    }
+export function shouldHideFromRequest(request) {
+  return request.cf?.country === "CN";
+}
 
-    return env.ASSETS.fetch(request);
-  },
-};
+export function mainlandChinaNotFoundResponse() {
+  return new Response(mainlandChinaNotFound, {
+    status: 404,
+    headers: {
+      "Cache-Control": "no-store",
+      "Content-Type": "text/html; charset=UTF-8",
+      "X-Robots-Tag": "noindex, nofollow",
+    },
+  });
+}
