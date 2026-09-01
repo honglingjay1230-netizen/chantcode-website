@@ -10,15 +10,6 @@ export const metadata: Metadata = {
   },
   description:
     "ChantCode helps children build multiplication fact fluency through rhythmic multiplication chants and structured recall practice.",
-  keywords: [
-    "multiplication facts",
-    "times tables",
-    "multiplication fluency",
-    "math fact recall",
-    "children multiplication learning",
-    "memory learning strategy",
-    "rhythmic learning",
-  ],
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
@@ -50,6 +41,7 @@ const organizationJsonLd = {
   name: "ChantCode",
   url: SITE.url,
   email: SITE.supportEmail,
+  logo: `${SITE.url}/chantcode-app-icon.png`,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

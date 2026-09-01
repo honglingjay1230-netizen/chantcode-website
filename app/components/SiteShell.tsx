@@ -4,6 +4,7 @@ import { SITE } from "../config";
 const links = [
   ["About", "/about"],
   ["Method", "/method"],
+  ["Guides", "/guides"],
   ["Parents", "/parents"],
   ["Book", "/book"],
   ["FAQ", "/faq"],
@@ -48,6 +49,9 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <a href="/app">App</a>
           <a href="/faq">FAQ</a>
           <a href="/parents">Parent Guide</a>
+          <a href="/guides">Guides</a>
+          <a href="/evidence">Evidence</a>
+          <a href="/families">Family Stories</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Use</a>
           <a href="/support">Support</a>

@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
 import { SITE } from "../config";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ChantCode FAQ",
   description: "Answers about ChantCode, multiplication facts, times tables, the Chinese multiplication chant, practice, and multiplication fluency.",
-  alternates: { canonical: "/faq" },
-  openGraph: { title: "ChantCode FAQ", description: "Clear answers for parents about ChantCode and multiplication fact recall.", url: "/faq" },
-};
+  path: "/faq",
+});
 
 const faqs = [
   { question: "What is ChantCode?", answer: "ChantCode is a multiplication learning system for English-speaking children. It encodes multiplication facts into short, regular sound patterns and combines memorization with structured recall practice." },

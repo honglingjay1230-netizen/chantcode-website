@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "ChantCode: Multiplication Book",
   description: "The book behind ChantCode: regular number-sound systems, Chinese multiplication chants, 36 core facts, and structured retrieval practice.",
-  alternates: { canonical: "/book" },
-  openGraph: { title: "ChantCode: Multiplication", description: "A Multiplication Code Stored in Sound.", url: "/book" },
-};
+  path: "/book",
+});
 
 const bookJsonLd = {
   "@context": "https://schema.org",

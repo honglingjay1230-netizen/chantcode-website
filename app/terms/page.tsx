@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { LegalPage } from "../components/LegalPage";
 import { SITE } from "../config";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Terms of Use",
   description: "Official terms governing use of the ChantCode multiplication learning application and educational content.",
-  alternates: { canonical: "/terms" },
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

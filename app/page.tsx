@@ -1,13 +1,13 @@
-import type { Metadata } from "next";
 import { SiteShell } from "./components/SiteShell";
 import { StoreButtons } from "./components/StoreButtons";
+import { createPageMetadata } from "./seo";
 
-export const metadata: Metadata = {
-  title: { absolute: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory" },
+export const metadata = createPageMetadata({
+  title: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory",
   description: "ChantCode helps children build multiplication fact fluency through rhythmic multiplication chants and structured recall practice.",
-  alternates: { canonical: "/" },
-  openGraph: { title: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory", description: "A multiplication code stored in sound, designed to support faster fact recall.", url: "/" },
-};
+  path: "/",
+  absoluteTitle: true,
+});
 
 const pillars = [
   { symbol: "×", title: "Multiplication", body: "Focused practice for the basic multiplication facts children need to retrieve fluently." },
@@ -44,6 +44,16 @@ export default function Home() {
         <section className="section reassurance-section">
           <p className="eyebrow">Designed to Work Alongside School</p><h2>Simple for families. Clear in purpose.</h2>
           <div className="reassurance-grid"><article><strong>No Chinese required</strong><p>The structural inspiration comes from Chinese multiplication chants, but ChantCode is designed for English-speaking children.</p></article><article><strong>Supports school mathematics</strong><p>ChantCode does not replace conceptual understanding, teachers, curriculum, or regular mathematics instruction.</p></article><article><strong>Short daily practice</strong><p>Brief practice sessions of around 5–10 minutes can fit naturally into a child&apos;s existing routine.</p></article></div>
+        </section>
+
+        <section className="section section-centered compact-section home-resource-section">
+          <p className="eyebrow">For Parents and Educators</p>
+          <h2>Questions, evidence, and real-world context</h2>
+          <div className="knowledge-grid">
+            <article><span>?</span><h3>Parent guides</h3><p>Start with a real question, including why a child can understand multiplication but still calculate every answer.</p><a className="primary-link" href="/guides/child-understands-multiplication-but-still-calculates">Read the priority guide <span aria-hidden="true">→</span></a></article>
+            <article><span>↗</span><h3>Evidence and background</h3><p>Review original sources, educational examples, and the limits of current claims about language, chants, and retrieval.</p><a className="primary-link" href="/evidence">Explore the evidence area <span aria-hidden="true">→</span></a></article>
+            <article><span>○</span><h3>Family experiences</h3><p>See how real pilot stories will be documented without inventing cases or presenting observations as controlled science.</p><a className="primary-link" href="/families">Visit family stories <span aria-hidden="true">→</span></a></article>
+          </div>
         </section>
 
         <section className="section app-intro-section">

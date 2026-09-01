@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = { title: "What is ChantCode?", description: "Learn what ChantCode means and how rhythm and structured repetition support multiplication fact recall.", alternates: { canonical: "/about" }, openGraph: { title: "What is ChantCode?", description: "A multiplication code stored in sound for English-speaking children.", url: "/about" } };
+export const metadata = createPageMetadata({ title: "What is ChantCode?", description: "Learn what ChantCode means and how rhythm and structured repetition support multiplication fact recall.", path: "/about" });
 
 export default function AboutPage() {
   return <SiteShell><main className="content-main"><header className="content-hero"><p className="eyebrow">About ChantCode</p><h1>What is ChantCode?</h1><p className="content-lede">ChantCode is a rhythmic multiplication memorization system designed to help children build multiplication fact fluency.</p></header><div className="method-sections">

@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "How ChantCode Works",
   description: "How ChantCode moves from listening and rhythmic repetition to prompted recall, independent recall, and multiplication fluency practice.",
-  alternates: { canonical: "/method" },
-  openGraph: { title: "How ChantCode Works", description: "A structured path from sound patterns to independent multiplication fact recall.", url: "/method" },
-};
+  path: "/method",
+});
 
 const stages = [
   ["01", "Listen", "The child first hears a short, fixed multiplication chant with consistent pronunciation, order, rhythm, and pauses."],

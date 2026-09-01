@@ -8,6 +8,9 @@ The official public knowledge site for ChantCode. It explains the product to par
 - `/about` — what ChantCode is
 - `/method` — how the method works
 - `/parents` — parent guide
+- `/guides` — parent questions about multiplication facts, fluency, recall, automaticity, chants, and home practice
+- `/evidence` — external sources, educational background, and evidence limits
+- `/families` — real pilot family stories when permission-based cases are available
 - `/learning` — 36 core facts and learning structure
 - `/book` — the book behind the method
 - `/faq` — parent and AI-search questions
@@ -36,4 +39,4 @@ npm test
 
 No D1 or R2 binding is required. App Store and Google Play links remain disabled until verified public listings exist.
 
-The production build is validated with `npm test` before each saved deployment version.
+The production build is validated with `npm test` before each deployment.
