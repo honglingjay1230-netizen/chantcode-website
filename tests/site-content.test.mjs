@@ -65,6 +65,33 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
   assert.equal(slugs.length, 8);
 });
 
+test("Pages worker returns a real 404 only for mainland China traffic", async () => {
+  const workerModule = await import(new URL("../public/_worker.js", import.meta.url));
+  const worker = workerModule.default;
+
+  const chinaResponse = await worker.fetch(
+    { cf: { country: "CN" } },
+    { ASSETS: { fetch: () => assert.fail("CN traffic must not reach site assets") } },
+  );
+  assert.equal(chinaResponse.status, 404);
+  assert.match(await chinaResponse.text(), /Page not found\./);
+  assert.equal(chinaResponse.headers.get("x-robots-tag"), "noindex, nofollow");
+
+  const assetResponse = new Response("site", { status: 200 });
+  const foreignRequest = { cf: { country: "US" } };
+  let forwardedRequest;
+  const foreignResponse = await worker.fetch(foreignRequest, {
+    ASSETS: {
+      fetch(request) {
+        forwardedRequest = request;
+        return assetResponse;
+      },
+    },
+  });
+  assert.equal(forwardedRequest, foreignRequest);
+  assert.equal(foreignResponse, assetResponse);
+});
+
 test("evidence pages keep source limits visible in HTML", async () => {
   const language = await readFile(new URL("dist/client/evidence/language-and-multiplication-recall.html", root), "utf8");
   const examples = await readFile(new URL("dist/client/evidence/chinese-multiplication-learning-examples.html", root), "utf8");
