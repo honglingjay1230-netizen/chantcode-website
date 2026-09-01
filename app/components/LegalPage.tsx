@@ -8,7 +8,7 @@ export function LegalPage({ title, children }: { title: string; children: ReactN
         <header className="legal-hero">
           <p className="eyebrow">ChantCode</p>
           <h1>{title}</h1>
-          <p>Last updated: August 2026</p>
+          <p>Last updated: August 29, 2026</p>
         </header>
         <article className="legal-content">{children}</article>
       </main>

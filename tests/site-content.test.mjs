@@ -3,7 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
-const pages = ["", "about/", "method/", "parents/", "learning/", "book/", "faq/", "app/", "privacy/", "support/"];
+const pages = ["", "about/", "method/", "parents/", "guides/", "evidence/", "families/", "learning/", "book/", "faq/", "app/", "privacy/", "terms/", "support/"];
 
 test("includes every public knowledge page", async () => {
   for (const page of pages) await access(new URL(`app/${page}page.tsx`, root));
@@ -22,4 +22,56 @@ test("FAQ visible content and FAQPage schema share one source", async () => {
   assert.match(faq, /FAQPage/);
   assert.match(faq, /What is ChantCode\?/);
   assert.match(faq, /Does ChantCode require learning Chinese\?/);
+});
+
+test("prerenders the priority guide as readable HTML with metadata and Article schema", async () => {
+  const html = await readFile(new URL("dist/client/guides/child-understands-multiplication-but-still-calculates.html", root), "utf8");
+  assert.match(html, /My Child Understands Multiplication but Still Calculates Every Answer/);
+  assert.match(html, /7 × 8/);
+  assert.match(html, /multiplication fact fluency/);
+  assert.match(html, /rel="canonical" href="https:\/\/chantcode\.com\/guides\/child-understands-multiplication-but-still-calculates"/);
+  assert.match(html, /"@type":"Article"/);
+  assert.doesNotMatch(html, /noindex/i);
+});
+
+test("robots and sitemap expose search crawlers and every guide", async () => {
+  const robots = await readFile(new URL("app/robots.txt/route.ts", root), "utf8");
+  const sitemap = await readFile(new URL("app/sitemap.xml/route.ts", root), "utf8");
+  const guideData = await readFile(new URL("app/guides/data.ts", root), "utf8");
+  const slugs = [...guideData.matchAll(/slug: "([^"]+)"/g)].map((match) => match[1]);
+
+  assert.match(robots, /"User-agent: Googlebot"[\s\S]*"Allow: \/"/);
+  assert.match(robots, /"User-agent: OAI-SearchBot"[\s\S]*"Allow: \/"/);
+  assert.match(sitemap, /guides\.map\(\(\{ slug \}\) => \(\{ path: guidePath\(slug\)/);
+  assert.match(sitemap, /language-and-multiplication-recall/);
+  assert.match(sitemap, /path: "\/families"/);
+  assert.equal(slugs.length, 8);
+});
+
+test("evidence pages keep source limits visible in HTML", async () => {
+  const language = await readFile(new URL("dist/client/evidence/language-and-multiplication-recall.html", root), "utf8");
+  const examples = await readFile(new URL("dist/client/evidence/chinese-multiplication-learning-examples.html", root), "utf8");
+
+  assert.match(language, /Singapore’s Ministry of Education/);
+  assert.match(language, /do not show that Singapore children generally learn multiplication this way/);
+  assert.match(language, /not as scientifically proven/);
+  assert.match(examples, /do not test ChantCode or prove that ChantCode improves recall/);
+  assert.match(examples, /does not copy, host, or re-upload/);
+});
+
+test("family stories remain an honest empty state until real cases exist", async () => {
+  const families = await readFile(new URL("dist/client/families.html", root), "utf8");
+  const data = await readFile(new URL("app/families/data.ts", root), "utf8");
+
+  assert.match(families, /Real family stories will be added as families complete the ChantCode pilot\./);
+  assert.match(families, /This is one family&#x27;s experience and is not a controlled scientific study\. Individual results may vary\./);
+  assert.match(data, /familyStories: FamilyStory\[\] = \[\]/);
+});
+
+test("app schema identifies the verified platform without inventing a store URL", async () => {
+  const app = await readFile(new URL("dist/client/app.html", root), "utf8");
+  assert.match(app, /"@type":"SoftwareApplication"/);
+  assert.match(app, /"applicationCategory":"EducationalApplication"/);
+  assert.match(app, /"operatingSystem":"iOS"/);
+  assert.doesNotMatch(app, /"downloadUrl":""/);
 });

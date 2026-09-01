@@ -1,12 +1,11 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Parent Guide",
   description: "Why multiplication fact recall can be difficult and how parents can support short, focused practice without replacing school mathematics.",
-  alternates: { canonical: "/parents" },
-  openGraph: { title: "ChantCode Parent Guide", description: "A practical guide to multiplication understanding, memory, recall, and fluency.", url: "/parents" },
-};
+  path: "/parents",
+});
 
 export default function ParentsPage() {
   return (

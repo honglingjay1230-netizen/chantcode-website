@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
 import { SiteShell } from "../components/SiteShell";
 import { SITE } from "../config";
+import { createPageMetadata } from "../seo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Help & Privacy",
   description: "Official ChantCode help, privacy, purchases, terms, and support information for families and App Store review.",
-  alternates: { canonical: "/support" },
-};
+  path: "/support",
+});
 
 export default function SupportPage() {
   return (
@@ -21,9 +21,10 @@ export default function SupportPage() {
         <section className="faq-list" aria-label="ChantCode help and privacy information">
           <article id="how-to-use"><h2>How to Use</h2><p><strong>Learning flow:</strong> Listen → Repeat → Recall → Practice.</p><p>Children begin with a multiplication song, repeat the chant aloud, test their recall, and then apply what they remember in Challenges.</p><p>Learning progress, test results, and completion status are saved locally on the device.</p></article>
           <article id="privacy-overview"><h2>Privacy Overview</h2><p>ChantCode respects children&apos;s privacy. The app is designed for learning multiplication facts and does not collect unnecessary personal information.</p></article>
-          <article id="data-collection"><h2>Data Collection</h2><p>ChantCode does not collect names, email addresses, location data, contacts, photos or videos, camera data, microphone data, or personal identifiers.</p></article>
+          <article id="data-collection"><h2>Data Collection</h2><p>ChantCode does not collect names, email addresses, location data, contacts, photos or videos, camera data, payment information, or personal identifiers. ChantCode does not retain microphone recordings or speech-recognition transcripts.</p></article>
           <article id="learning-data"><h2>Learning Data</h2><p>Learning progress, test results, and completion status are stored locally on the user&apos;s device.</p><p>ChantCode does not upload, share, sell, or transmit children&apos;s learning data.</p></article>
-          <article id="third-party-services"><h2>Third-Party Services</h2><p>ChantCode does not use third-party advertising, behavioral tracking, or analytics services that collect children&apos;s personal information.</p></article>
+          <article id="voice-follow-along"><h2>Voice Follow-Along</h2><p>Voice Follow-Along uses the device microphone and Apple&apos;s Speech service to provide practice feedback after a child repeats a prompted chant. When network processing is required, audio may be sent to Apple solely for the current speech-recognition request. ChantCode does not retain the recording or transcript. Final independent recitation is evaluated by a parent.</p></article>
+          <article id="third-party-services"><h2>Third-Party Services</h2><p>ChantCode uses Apple Speech for Voice Follow-Along and Apple&apos;s App Store services for purchases. ChantCode does not use third-party advertising, behavioral tracking, or analytics services that collect children&apos;s personal information.</p></article>
           <article id="childrens-privacy"><h2>Children&apos;s Privacy</h2><p>ChantCode is designed for children. The app does not require children to create accounts or provide personal information.</p></article>
           <article id="data-deletion"><h2>Data Deletion</h2><p>Users can delete locally stored learning data through <strong>Settings → Reset Learning Progress</strong>.</p><p>Deleting the app will also remove locally stored learning data.</p></article>
           <article id="purchases"><h2>Purchases</h2><p>ChantCode Full Version is available through Apple App Store In-App Purchase.</p><p>All payments are processed by Apple. ChantCode does not receive or store payment information.</p></article>

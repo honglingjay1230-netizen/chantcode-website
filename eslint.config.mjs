@@ -13,6 +13,10 @@ const eslintConfig = defineConfig([
     "dist/**",
     "out/**",
     "build/**",
+    ".vinext/**",
+    ".wrangler/**",
+    "outputs/**",
+    "worker/**",
     "next-env.d.ts",
   ]),
   eslint.configs.recommended,
@@ -23,6 +27,11 @@ const eslintConfig = defineConfig([
   jsxA11y.flatConfigs.recommended,
   next.configs["core-web-vitals"],
   {
+    rules: {
+      // Internal navigation intentionally uses plain anchors so every important
+      // public URL is present as a crawlable HTML href without client routing.
+      "@next/next/no-html-link-for-pages": "off",
+    },
     languageOptions: {
       globals: {
         ...globals.browser,
