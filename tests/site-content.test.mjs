@@ -41,8 +41,23 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
   const guideData = await readFile(new URL("app/guides/data.ts", root), "utf8");
   const slugs = [...guideData.matchAll(/slug: "([^"]+)"/g)].map((match) => match[1]);
 
-  assert.match(robots, /User-agent: Googlebot[\s\S]*Allow: \//);
-  assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
+  const groups = robots.trim().split(/\r?\n\s*\r?\n/);
+  const groupFor = (crawler) => groups.find((group) => group.split(/\r?\n/).includes(`User-agent: ${crawler}`));
+  const allowedCrawlers = ["Googlebot", "Google-Extended", "GPTBot", "OAI-SearchBot", "ClaudeBot", "PerplexityBot"];
+  const blockedCrawlers = ["Baiduspider", "Bytespider", "PetalBot", "Sogou web spider", "360Spider"];
+
+  for (const crawler of allowedCrawlers) {
+    const group = groupFor(crawler);
+    assert.ok(group, `${crawler} must have an explicit robots.txt group`);
+    assert.match(group, /^Allow: \/$/m);
+    assert.doesNotMatch(group, /^Disallow:/m);
+  }
+  for (const crawler of blockedCrawlers) {
+    const group = groupFor(crawler);
+    assert.ok(group, `${crawler} must have an explicit robots.txt group`);
+    assert.match(group, /^Disallow: \/$/m);
+    assert.doesNotMatch(group, /^Allow:/m);
+  }
   assert.match(generator, /quotedSlugs\("app\/guides\/data\.ts"\)/);
   assert.match(sitemap, /language-and-multiplication-recall/);
   assert.match(sitemap, /https:\/\/chantcode\.com\/families/);

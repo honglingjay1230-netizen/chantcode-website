@@ -34,15 +34,60 @@ const guideRoutes = (await quotedSlugs("app/guides/data.ts")).map((slug) => `/gu
 const familyRoutes = (await quotedSlugs("app/families/data.ts")).map((slug) => `/families/${slug}`);
 const routes = [...new Set([...coreRoutes, ...guideRoutes, ...familyRoutes])].sort();
 
+// The wildcard group keeps the site open to search and AI crawlers by default.
+// These explicit groups document the intended policy and override conflicting
+// same-agent rules added by an upstream provider when the crawler follows REP.
+const allowedInternationalCrawlers = [
+  "Amazonbot",
+  "Applebot",
+  "Applebot-Extended",
+  "bingbot",
+  "CCBot",
+  "ChatGPT-User",
+  "ClaudeBot",
+  "Claude-SearchBot",
+  "Claude-User",
+  "Googlebot",
+  "Google-Extended",
+  "GPTBot",
+  "meta-externalagent",
+  "Meta-ExternalFetcher",
+  "OAI-AdsBot",
+  "OAI-SearchBot",
+  "PerplexityBot",
+  "Perplexity-User",
+];
+
+// Identified crawlers operated by companies based in China are excluded.
+// robots.txt is voluntary, so non-compliant or unidentified bots need a WAF rule.
+const blockedChinaCrawlers = [
+  "360Spider",
+  "Baiduspider",
+  "BaiduImagespider",
+  "BaiduMobaider",
+  "Bytespider",
+  "EtaoSpider",
+  "HaosouSpider",
+  "PetalBot",
+  "Sogou web spider",
+  "Sosospider",
+  "ToutiaoSpider",
+  "YisouSpider",
+  "YoudaoBot",
+];
+
 const robots = [
+  "# Default policy: allow search engines and AI crawlers.",
   "User-agent: *",
   "Allow: /",
   "",
-  "User-agent: Googlebot",
+  "# Explicitly allow major international search and AI crawlers.",
+  ...allowedInternationalCrawlers.map((crawler) => `User-agent: ${crawler}`),
   "Allow: /",
   "",
-  "User-agent: OAI-SearchBot",
-  "Allow: /",
+  "# Block identified crawlers operated by companies based in China.",
+  ...blockedChinaCrawlers.map((crawler) => `User-agent: ${crawler}`),
+  "Disallow: /",
   "",
   `Sitemap: ${canonicalOrigin}/sitemap.xml`,
   "",
