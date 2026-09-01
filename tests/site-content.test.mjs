@@ -35,16 +35,18 @@ test("prerenders the priority guide as readable HTML with metadata and Article s
 });
 
 test("robots and sitemap expose search crawlers and every guide", async () => {
-  const robots = await readFile(new URL("app/robots.txt/route.ts", root), "utf8");
-  const sitemap = await readFile(new URL("app/sitemap.xml/route.ts", root), "utf8");
+  const robots = await readFile(new URL("dist/client/robots.txt", root), "utf8");
+  const sitemap = await readFile(new URL("dist/client/sitemap.xml", root), "utf8");
+  const generator = await readFile(new URL("scripts/generate-search-files.mjs", root), "utf8");
   const guideData = await readFile(new URL("app/guides/data.ts", root), "utf8");
   const slugs = [...guideData.matchAll(/slug: "([^"]+)"/g)].map((match) => match[1]);
 
-  assert.match(robots, /"User-agent: Googlebot"[\s\S]*"Allow: \/"/);
-  assert.match(robots, /"User-agent: OAI-SearchBot"[\s\S]*"Allow: \/"/);
-  assert.match(sitemap, /guides\.map\(\(\{ slug \}\) => \(\{ path: guidePath\(slug\)/);
+  assert.match(robots, /User-agent: Googlebot[\s\S]*Allow: \//);
+  assert.match(robots, /User-agent: OAI-SearchBot[\s\S]*Allow: \//);
+  assert.match(generator, /quotedSlugs\("app\/guides\/data\.ts"\)/);
   assert.match(sitemap, /language-and-multiplication-recall/);
-  assert.match(sitemap, /path: "\/families"/);
+  assert.match(sitemap, /https:\/\/chantcode\.com\/families/);
+  for (const slug of slugs) assert.match(sitemap, new RegExp(`/guides/${slug}`));
   assert.equal(slugs.length, 8);
 });
 
