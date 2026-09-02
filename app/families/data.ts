@@ -13,6 +13,7 @@ export type FamilyStory = {
   description: string;
   childAge?: string;
   startingPoint: string;
+  learningChallenge: string;
   practice: string;
   duration: string;
   parentObservation: string;

@@ -2,6 +2,10 @@ export type GuideSection = {
   heading: string;
   paragraphs: string[];
   bullets?: string[];
+  contextLink?: {
+    href: string;
+    label: string;
+  };
 };
 
 export type GuideReference = {
@@ -18,6 +22,7 @@ export type Guide = {
   sections: GuideSection[];
   references?: GuideReference[];
   chantcodeNote: string;
+  chantcodeHeading?: string;
   related: string[];
   datePublished: string;
   dateModified: string;
@@ -33,18 +38,28 @@ export const guides: Guide[] = [
     answer: "If your child understands what multiplication means but still works out every answer, the next learning task is retrieval: helping known facts become easier to recall without rebuilding them each time. Keep conceptual understanding in place, then add short, focused practice that asks the child to produce answers from memory.",
     sections: [
       {
-        heading: "Understanding and recall are different achievements",
+        heading: "The learning challenge",
         paragraphs: [
+          "A parent may describe the problem this way: “My child knows multiplication, but still needs to work out answers.” The child may know the lesson but cannot answer quickly, or may still count for facts such as 7 × 8. This can be a normal stage between understanding a multiplication idea and recalling a familiar fact efficiently.",
           "A child can correctly explain multiplication as equal groups, draw an array, or use repeated addition and still not have the basic facts stored for direct access. This is common. It does not mean the child has failed to understand multiplication, and it does not mean the child is not good at mathematics.",
-          "Conceptual understanding answers questions such as “Why is 7 × 8 equal to 56?” Fact retrieval answers a different question: “Can 56 be brought to mind accurately when 7 × 8 appears?” Both matter, and one does not replace the other.",
         ],
       },
       {
-        heading: "What 7 × 8 can look like before recall is automatic",
+        heading: "What is happening?",
         paragraphs: [
+          "Understanding multiplication and recalling multiplication facts are different skills. Conceptual understanding answers questions such as “Why is 7 × 8 equal to 56?” Fact retrieval answers a different question: “Can 56 be brought to mind accurately when 7 × 8 appears?” Both matter, and one does not replace the other.",
           "A child may solve 7 × 8 by adding seven eight times, counting by sevens, recalling 7 × 7 = 49 and adding another 7, or building from 5 × 8 and 2 × 8. These are valid reasoning strategies. They show useful number knowledge.",
           "The difficulty comes when the child must repeat that reconstruction for nearly every basic fact. The mental effort used to rebuild 56 is then unavailable for the next step in a longer calculation. The goal is not to ban strategies; it is to let a correct strategy support memory until the answer itself becomes easier to retrieve.",
         ],
+        bullets: [
+          "Stage 1 — Counting or repeated addition: 7 + 7 + 7 + 7 + 7 + 7 + 7 + 7 = 56.",
+          "Stage 2 — Using a known fact or strategy: knowing 7 × 7 = 49 and adding another 7.",
+          "Stage 3 — Direct recall: seeing 7 × 8 and recalling 56 without rebuilding the answer.",
+        ],
+        contextLink: {
+          href: "/guides/multiplication-fact-fluency",
+          label: "Learn more about multiplication fact fluency.",
+        },
       },
       {
         heading: "Name the stage: multiplication fact fluency",
@@ -54,8 +69,9 @@ export const guides: Guide[] = [
         ],
       },
       {
-        heading: "A practical way to move from calculation to recall",
+        heading: "What can parents do?",
         paragraphs: [
+          "Use short, focused practice with repeated exposure, retrieval practice, and mixed recall. Avoid relying only on recognition activities where the child can see the answer or predict it from a fixed sequence.",
           "Choose a very small set of facts rather than drilling the whole table. Confirm the meaning of each fact once with groups, an array, or a known-fact strategy. Then change the task: show the question without the answer and ask the child to retrieve it.",
           "If the answer does not come, let the child use one efficient strategy, such as 7 × 7 plus 7 for 7 × 8. After reaching 56, have the child restate the complete fact—“seven times eight is fifty-six”—so the question and answer finish together. Ask it again later, in a different order, rather than immediately repeating it many times in a row.",
         ],
@@ -75,10 +91,11 @@ export const guides: Guide[] = [
         ],
       },
     ],
-    chantcodeNote: "ChantCode is an iOS learning app designed to help children move from repeatedly calculating multiplication facts toward faster recall through rhythmic multiplication chants and focused recall practice. It is intended for this recall-building stage and works alongside conceptual teaching rather than replacing it.",
-    related: ["multiplication-fact-fluency", "multiplication-automaticity", "multiplication-chants", "times-tables-practice-at-home"],
+    chantcodeNote: "ChantCode helps children practice multiplication fact recall through rhythmic multiplication chants and focused recall practice. It is one possible tool for this recall-building stage and works alongside conceptual teaching, teacher guidance, and other forms of practice.",
+    chantcodeHeading: "How ChantCode approaches this",
+    related: ["multiplication-automaticity"],
     datePublished: articleDate,
-    dateModified: articleDate,
+    dateModified: "2026-09-02",
   },
   {
     slug: "how-to-memorize-multiplication-facts",
@@ -140,10 +157,17 @@ export const guides: Guide[] = [
     answer: "Multiplication fact fluency is the ability to answer basic multiplication facts accurately, efficiently, and with enough flexibility to use a sensible strategy when direct recall is not yet available. Fluent performance increasingly includes automatic recall, but fluency is not simply a race against a timer.",
     sections: [
       {
-        heading: "Four ideas that are related but not identical",
+        heading: "What multiplication fact fluency means",
         paragraphs: [
+          "Multiplication fact fluency includes accuracy, speed, and reliable recall. A child may know the correct answer but still need extra time to retrieve it.",
+          "Retrieval is the act of bringing an answer to mind. Automaticity describes familiar facts becoming available with little conscious effort. Direct recall is the result: the child can answer without first counting or reconstructing the product.",
           "Understanding means knowing what multiplication represents and why a fact is true. Accuracy means producing the correct answer. Speed describes how long an answer takes. Automatic recall means a familiar answer is retrieved with very little conscious calculation.",
           "Fluency brings these ideas together. A fluent child has a sound conceptual base, answers reliably, can use efficient relationships when needed, and directly recalls a growing set of familiar facts. A fast guess is not fluency, and a correct answer reached through a long count is accurate but not yet efficient.",
+        ],
+        bullets: [
+          "Understanding — knowing what multiplication means and why a fact is true.",
+          "Fluency — retrieving facts accurately and efficiently, with useful strategies still available when needed.",
+          "Automaticity — recalling familiar facts with little conscious effort.",
         ],
       },
       {
@@ -166,6 +190,10 @@ export const guides: Guide[] = [
           "Build concepts first, teach useful fact relationships, and then provide repeated opportunities to retrieve answers with feedback. Practice should gradually move from a small related set to mixed facts and from immediate review to later review.",
           "The goal is dependable access: a child should be able to answer a fact in both factor orders, outside the original table sequence, and after time has passed. The automaticity guide explains the most direct form of that access.",
         ],
+        contextLink: {
+          href: "/guides/multiplication-automaticity",
+          label: "Learn how multiplication automaticity relates to fluent recall.",
+        },
       },
     ],
     references: [
@@ -175,10 +203,11 @@ export const guides: Guide[] = [
         note: "A 2023 classroom study comparing retrieval practice with restudy; useful evidence for the role of active recall, with limitations stated by the authors.",
       },
     ],
-    chantcodeNote: "ChantCode is an iOS learning app designed to help children move from repeatedly calculating multiplication facts toward faster recall through rhythmic multiplication chants and focused recall practice. It addresses one part of fluency—fact storage and retrieval—and does not replace conceptual mathematics instruction.",
-    related: ["multiplication-automaticity", "understanding-vs-memorizing-multiplication", "times-tables-practice-at-home"],
+    chantcodeNote: "ChantCode supports the fact-retrieval part of multiplication fluency through rhythmic multiplication chants and focused recall practice. It does not replace conceptual mathematics instruction or define fluency as speed alone.",
+    chantcodeHeading: "How ChantCode approaches this",
+    related: ["understanding-vs-memorizing-multiplication"],
     datePublished: articleDate,
-    dateModified: articleDate,
+    dateModified: "2026-09-02",
   },
   {
     slug: "multiplication-automaticity",
@@ -285,17 +314,23 @@ export const guides: Guide[] = [
     answer: "Multiplication chants can help some children learn a stable verbal sequence through rhythm and repetition. They are a memory aid, not proof of fluent recall, and they will not suit every child. To become useful outside the chant, the facts also need hidden-answer, random, and mixed retrieval practice.",
     sections: [
       {
-        heading: "What a chant can contribute",
+        heading: "What chanting can provide",
         paragraphs: [
+          "Rhythm, repetition, and stable verbal patterns can organize multiplication facts into memorable sequences for some children.",
           "A chant puts words into a consistent order with predictable timing. That structure can make a group of facts easier to repeat accurately and can give a child a verbal path to replay when an answer is not yet direct.",
           "For multiplication, the useful unit is not rhythm by itself. The factors and product must remain clear and correctly associated. A catchy line that blurs the numbers or changes wording each time is not a reliable memory cue.",
         ],
       },
       {
-        heading: "Repetition and retrieval do different jobs",
+        heading: "Chanting is not the same as recall practice",
         paragraphs: [
           "Chanting with an answer present is a form of restudy. It can support familiarity and accurate rehearsal. Retrieval practice asks the child to produce an answer while it is hidden. That is closer to what the child must do when a multiplication fact appears in later mathematics.",
           "A 2023 classroom study with 48 second-grade pupils compared individual flashcard retrieval practice with whole-class chanting as restudy. Both groups improved, but retrieval practice produced stronger gains in that study. The formats also differed in individual versus group practice, and the authors identify that as a limitation. The responsible conclusion is that chanting should not be the only practice—not that chants are useless.",
+        ],
+        bullets: [
+          "Listening and repeating with the answer present is rehearsal.",
+          "Answering without seeing the answer is retrieval practice.",
+          "Both can have a role, but rehearsal alone does not demonstrate independent recall.",
         ],
       },
       {
@@ -326,10 +361,11 @@ export const guides: Guide[] = [
         note: "A classroom comparison of flashcard retrieval practice and chanting as restudy; the page reports the result and the study’s limits without treating it as proof of ChantCode.",
       },
     ],
-    chantcodeNote: "ChantCode is an iOS learning app designed to help children move from repeatedly calculating multiplication facts toward faster recall through rhythmic multiplication chants and focused recall practice. Its design treats chant as a starting memory structure and recall practice as a separate, necessary step.",
-    related: ["multiplication-fact-fluency", "times-tables-practice-at-home", "multiplication-automaticity"],
+    chantcodeNote: "ChantCode combines rhythmic multiplication chants, accurate repetition, and focused recall practice. It treats chants as one possible learning structure and does not claim that they work better than every other method or suit every child.",
+    chantcodeHeading: "How ChantCode uses chants",
+    related: ["multiplication-fact-fluency", "times-tables-practice-at-home"],
     datePublished: articleDate,
-    dateModified: articleDate,
+    dateModified: "2026-09-02",
   },
   {
     slug: "times-tables-practice-at-home",

@@ -35,7 +35,7 @@ export default function FamiliesPage() {
           <h2>Every future story will include</h2>
           <ul>
             <li>Permission before sharing a child’s age or media</li>
-            <li>A starting point and actual practice duration</li>
+            <li>A starting point, learning challenge, and actual practice duration</li>
             <li>The parent’s observation in context</li>
             <li>A full readable transcript when video is included</li>
             <li>A fixed disclaimer separating experience from controlled evidence</li>

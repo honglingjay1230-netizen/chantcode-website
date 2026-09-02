@@ -12,20 +12,20 @@ The website accepts ordinary query strings without changing the canonical URL, s
 
 Use a clean browser session when possible. Record the country/language setting because results vary by location, account, and date.
 
-1. My child understands multiplication but still works out every answer. What should I do?
+1. My child understands multiplication but still calculates every answer. What should I do?
 2. How can I help my child memorize multiplication facts?
-3. What apps help children develop multiplication fact automaticity?
+3. What helps children develop multiplication fact fluency?
 4. Are multiplication chants useful for learning times tables?
-5. My 8-year-old knows multiplication but cannot recall 7×8 quickly. What can help?
+5. My child knows multiplication but cannot recall 7×8 quickly. What can help?
 6. What is the best way to build multiplication fact fluency?
 
 ## Weekly record
 
 Copy one row per question and search system. Keep the exact wording used by the system rather than paraphrasing it.
 
-| Date | AI/search engine | Question number | Does ChantCode appear? | ChantCode URL cited | Wording used | Notes |
-| --- | --- | ---: | --- | --- | --- | --- |
-| YYYY-MM-DD | ChatGPT Search / Google AI Mode / Gemini / Copilot / Google Search | 1 | Yes / No |  |  | Country, language, signed-in state |
+| Date | AI/search engine | Question number | Question | Does ChantCode appear? | ChantCode URL cited | Citation/link provided? | Wording used | Notes |
+| --- | --- | ---: | --- | --- | --- | --- | --- | --- |
+| YYYY-MM-DD | ChatGPT Search / Google AI Mode / Gemini / Copilot / Google Search | 1 |  | Yes / No |  | Yes / No |  | Country, language, signed-in state |
 
 ## Interpretation
 

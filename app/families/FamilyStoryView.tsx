@@ -29,6 +29,7 @@ export function FamilyStoryView({ story }: { story: FamilyStory }) {
       <div className="article-content family-story-content">
         {story.childAge ? <section><h2>Child age</h2><p>{story.childAge} · Shared with parent or guardian permission.</p></section> : null}
         <section><h2>Starting point</h2><p>{story.startingPoint}</p></section>
+        <section><h2>Learning challenge</h2><p>{story.learningChallenge}</p></section>
         <section><h2>What the child practiced</h2><p>{story.practice}</p></section>
         <section><h2>Duration</h2><p>{story.duration}</p></section>
         <section><h2>Parent observation</h2><p>{story.parentObservation}</p></section>

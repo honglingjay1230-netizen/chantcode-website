@@ -49,6 +49,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
                 <h2>{section.heading}</h2>
                 {section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
                 {section.bullets ? <ul>{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+                {section.contextLink ? <p><a href={section.contextLink.href}>{section.contextLink.label}</a></p> : null}
               </section>
             ))}
 
@@ -74,7 +75,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
             <section className="product-context">
               <p className="eyebrow">Where ChantCode Fits</p>
-              <h2>A focused tool for the recall-building stage</h2>
+              <h2>{guide.chantcodeHeading ?? "A focused tool for the recall-building stage"}</h2>
               <p>{guide.chantcodeNote}</p>
               <a className="primary-link" href="/app">Learn about the ChantCode app <span aria-hidden="true">→</span></a>
             </section>
