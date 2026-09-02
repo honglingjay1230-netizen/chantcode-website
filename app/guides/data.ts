@@ -40,7 +40,7 @@ export const guides: Guide[] = [
       {
         heading: "The learning challenge",
         paragraphs: [
-          "A parent may describe the problem this way: “My child knows multiplication, but still needs to work out answers.” The child may know the lesson but cannot answer quickly, or may still count for facts such as 7 × 8. This can be a normal stage between understanding a multiplication idea and recalling a familiar fact efficiently.",
+          "A parent may describe the problem this way: “My child knows multiplication, but still needs to work out answers.” The child knows the lesson but cannot answer quickly, or may still count for facts such as 7 × 8. This can be a normal stage between understanding a multiplication idea and recalling a familiar fact efficiently.",
           "A child can correctly explain multiplication as equal groups, draw an array, or use repeated addition and still not have the basic facts stored for direct access. This is common. It does not mean the child has failed to understand multiplication, and it does not mean the child is not good at mathematics.",
         ],
       },
