@@ -1,40 +1,41 @@
-# Default policy: allow search engines and AI crawlers.
+# Allow search indexing and real-time AI answers; reserve model-training use.
 User-agent: *
+Content-signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
-# Explicitly allow major international search and AI crawlers.
-User-agent: Amazonbot
+# International search, answer-grounding, and user-requested fetchers.
+User-agent: Amzn-SearchBot
+User-agent: Amzn-User
 User-agent: Applebot
-User-agent: Applebot-Extended
 User-agent: bingbot
-User-agent: CCBot
 User-agent: ChatGPT-User
-User-agent: ClaudeBot
 User-agent: Claude-SearchBot
 User-agent: Claude-User
 User-agent: Googlebot
-User-agent: Google-Extended
-User-agent: GPTBot
-User-agent: meta-externalagent
-User-agent: Meta-ExternalFetcher
+User-agent: meta-externalfetcher
 User-agent: OAI-AdsBot
 User-agent: OAI-SearchBot
 User-agent: PerplexityBot
 User-agent: Perplexity-User
+Content-signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
+
+# International crawlers used for model training or bulk datasets.
+User-agent: Amazonbot
+User-agent: Applebot-Extended
+User-agent: CCBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: meta-externalagent
+Disallow: /
 
 # Block identified crawlers operated by companies based in China.
 User-agent: 360Spider
 User-agent: Baiduspider
-User-agent: BaiduImagespider
-User-agent: BaiduMobaider
 User-agent: Bytespider
-User-agent: EtaoSpider
-User-agent: HaosouSpider
 User-agent: PetalBot
 User-agent: Sogou web spider
-User-agent: Sosospider
-User-agent: ToutiaoSpider
 User-agent: YisouSpider
 User-agent: YoudaoBot
 Disallow: /

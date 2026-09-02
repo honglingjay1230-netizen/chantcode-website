@@ -34,56 +34,61 @@ const guideRoutes = (await quotedSlugs("app/guides/data.ts")).map((slug) => `/gu
 const familyRoutes = (await quotedSlugs("app/families/data.ts")).map((slug) => `/families/${slug}`);
 const routes = [...new Set([...coreRoutes, ...guideRoutes, ...familyRoutes])].sort();
 
-// The wildcard group keeps the site open to search and AI crawlers by default.
-// These explicit groups document the intended policy and override conflicting
-// same-agent rules added by an upstream provider when the crawler follows REP.
-const allowedInternationalCrawlers = [
-  "Amazonbot",
+// Search indexing, answer grounding, and user-requested fetchers are allowed.
+// Model-training crawlers use separate groups so search visibility does not
+// require granting training access.
+const allowedSearchAndAnswerCrawlers = [
+  "Amzn-SearchBot",
+  "Amzn-User",
   "Applebot",
-  "Applebot-Extended",
   "bingbot",
-  "CCBot",
   "ChatGPT-User",
-  "ClaudeBot",
   "Claude-SearchBot",
   "Claude-User",
   "Googlebot",
-  "Google-Extended",
-  "GPTBot",
-  "meta-externalagent",
-  "Meta-ExternalFetcher",
+  "meta-externalfetcher",
   "OAI-AdsBot",
   "OAI-SearchBot",
   "PerplexityBot",
   "Perplexity-User",
 ];
 
-// Identified crawlers operated by companies based in China are excluded.
-// robots.txt is voluntary, so non-compliant or unidentified bots need a WAF rule.
+const blockedTrainingCrawlers = [
+  "Amazonbot",
+  "Applebot-Extended",
+  "CCBot",
+  "ClaudeBot",
+  "Google-Extended",
+  "GPTBot",
+  "meta-externalagent",
+];
+
+// Only documented crawler tokens are listed. Network enforcement is handled
+// separately because robots.txt is voluntary and user agents can be spoofed.
 const blockedChinaCrawlers = [
   "360Spider",
   "Baiduspider",
-  "BaiduImagespider",
-  "BaiduMobaider",
   "Bytespider",
-  "EtaoSpider",
-  "HaosouSpider",
   "PetalBot",
   "Sogou web spider",
-  "Sosospider",
-  "ToutiaoSpider",
   "YisouSpider",
   "YoudaoBot",
 ];
 
 const robots = [
-  "# Default policy: allow search engines and AI crawlers.",
+  "# Allow search indexing and real-time AI answers; reserve model-training use.",
   "User-agent: *",
+  "Content-signal: search=yes, ai-input=yes, ai-train=no",
   "Allow: /",
   "",
-  "# Explicitly allow major international search and AI crawlers.",
-  ...allowedInternationalCrawlers.map((crawler) => `User-agent: ${crawler}`),
+  "# International search, answer-grounding, and user-requested fetchers.",
+  ...allowedSearchAndAnswerCrawlers.map((crawler) => `User-agent: ${crawler}`),
+  "Content-signal: search=yes, ai-input=yes, ai-train=no",
   "Allow: /",
+  "",
+  "# International crawlers used for model training or bulk datasets.",
+  ...blockedTrainingCrawlers.map((crawler) => `User-agent: ${crawler}`),
+  "Disallow: /",
   "",
   "# Block identified crawlers operated by companies based in China.",
   ...blockedChinaCrawlers.map((crawler) => `User-agent: ${crawler}`),

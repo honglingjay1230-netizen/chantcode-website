@@ -34,7 +34,7 @@ test("prerenders the priority guide as readable HTML with metadata and Article s
   assert.doesNotMatch(html, /noindex/i);
 });
 
-test("robots and sitemap expose search crawlers and every guide", async () => {
+test("robots separates search and answer crawlers from training and China crawlers", async () => {
   const robots = await readFile(new URL("dist/client/robots.txt", root), "utf8");
   const sitemap = await readFile(new URL("dist/client/sitemap.xml", root), "utf8");
   const generator = await readFile(new URL("scripts/generate-search-files.mjs", root), "utf8");
@@ -43,15 +43,45 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
 
   const groups = robots.trim().split(/\r?\n\s*\r?\n/);
   const groupFor = (crawler) => groups.find((group) => group.split(/\r?\n/).includes(`User-agent: ${crawler}`));
-  const allowedCrawlers = ["Googlebot", "Google-Extended", "GPTBot", "OAI-SearchBot", "ClaudeBot", "PerplexityBot"];
-  const blockedCrawlers = ["Baiduspider", "Bytespider", "PetalBot", "Sogou web spider", "360Spider"];
+  const allowedCrawlers = [
+    "Googlebot",
+    "bingbot",
+    "OAI-SearchBot",
+    "ChatGPT-User",
+    "Claude-SearchBot",
+    "Claude-User",
+    "PerplexityBot",
+    "Perplexity-User",
+    "Applebot",
+    "Amzn-SearchBot",
+    "Amzn-User",
+  ];
+  const blockedCrawlers = [
+    "GPTBot",
+    "Google-Extended",
+    "ClaudeBot",
+    "Applebot-Extended",
+    "CCBot",
+    "Amazonbot",
+    "meta-externalagent",
+    "Baiduspider",
+    "Bytespider",
+    "PetalBot",
+    "Sogou web spider",
+    "360Spider",
+    "YisouSpider",
+    "YoudaoBot",
+  ];
 
   for (const crawler of allowedCrawlers) {
     const group = groupFor(crawler);
     assert.ok(group, `${crawler} must have an explicit robots.txt group`);
     assert.match(group, /^Allow: \/$/m);
+    assert.match(group, /^Content-signal: search=yes, ai-input=yes, ai-train=no$/m);
     assert.doesNotMatch(group, /^Disallow:/m);
   }
+  assert.doesNotMatch(robots, /BaiduImagespider|BaiduMobaider|EtaoSpider|HaosouSpider|Sosospider|ToutiaoSpider/);
+  assert.match(robots, /^Sitemap: https:\/\/chantcode\.com\/sitemap\.xml$/m);
   for (const crawler of blockedCrawlers) {
     const group = groupFor(crawler);
     assert.ok(group, `${crawler} must have an explicit robots.txt group`);
@@ -65,22 +95,37 @@ test("robots and sitemap expose search crawlers and every guide", async () => {
   assert.equal(slugs.length, 8);
 });
 
-test("Pages middleware returns a real 404 only for mainland China traffic", async () => {
+test("Pages middleware blocks only mainland China and selected crawler purposes", async () => {
   const middleware = await import(new URL("../functions/_middleware.js", import.meta.url));
-  const { mainlandChinaNotFoundResponse, onRequest, shouldHideFromRequest } = middleware;
+  const { isBlockedCrawlerRequest, isMainlandChinaRequest, onRequest } = middleware;
+  const requestFor = (country, userAgent = "Mozilla/5.0") => ({
+    cf: { country },
+    headers: new Headers({ "user-agent": userAgent }),
+  });
 
-  assert.equal(shouldHideFromRequest({ cf: { country: "CN" } }), true);
-  assert.equal(shouldHideFromRequest({ cf: { country: "US" } }), false);
-  assert.equal(shouldHideFromRequest({}), false);
+  assert.equal(isMainlandChinaRequest(requestFor("CN")), true);
+  for (const country of ["HK", "MO", "TW", "SG", "US", "GB", "CA", "AU", "NZ", "DE", "FR"]) {
+    assert.equal(isMainlandChinaRequest(requestFor(country)), false, `${country} must remain available`);
+  }
 
-  const chinaResponse = mainlandChinaNotFoundResponse();
-  assert.equal(chinaResponse.status, 404);
-  assert.match(await chinaResponse.text(), /Page not found\./);
+  for (const userAgent of ["GPTBot/1.4", "ClaudeBot/1.0", "CCBot/2.0", "Baiduspider/2.0", "YisouSpider/5.0"]) {
+    assert.equal(isBlockedCrawlerRequest(requestFor("US", userAgent)), true, `${userAgent} must be blocked`);
+  }
+  for (const userAgent of ["Googlebot/2.1", "bingbot/2.0", "OAI-SearchBot/1.4", "Claude-SearchBot/1.0", "PerplexityBot/1.0", "Applebot/0.1"]) {
+    assert.equal(isBlockedCrawlerRequest(requestFor("US", userAgent)), false, `${userAgent} must be allowed`);
+  }
+
+  const chinaResponse = await onRequest({ request: requestFor("CN"), next: async () => new Response("public") });
+  assert.equal(chinaResponse.status, 403);
+  assert.match(await chinaResponse.text(), /Access denied/);
   assert.equal(chinaResponse.headers.get("x-robots-tag"), "noindex, nofollow");
+
+  const blockedBotResponse = await onRequest({ request: requestFor("US", "GPTBot/1.4"), next: async () => new Response("public") });
+  assert.equal(blockedBotResponse.status, 403);
 
   let nextCalls = 0;
   const publicResponse = await onRequest({
-    request: { cf: { country: "US" } },
+    request: requestFor("US", "OAI-SearchBot/1.4"),
     next: async () => {
       nextCalls += 1;
       return new Response("public", { status: 200 });
