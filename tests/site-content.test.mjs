@@ -24,6 +24,14 @@ test("homepage explains ChantCode without exposing a web game", async () => {
 test("FAQ visible content and FAQPage schema share one source", async () => {
   const faq = await readFile(new URL("app/faq/page.tsx", root), "utf8");
   assert.match(faq, /FAQPage/);
+  assert.match(faq, /Why another multiplication app\?/);
+  assert.match(faq, /My child is already learning multiplication at school/);
+  assert.match(faq, /Why not just use flashcards\?/);
+  assert.match(faq, /Isn’t ChantCode still asking children to memorize multiplication facts\?/);
+  assert.match(faq, /Why does my child need to learn them quickly\?/);
+  assert.match(faq, /So what does ChantCode actually do differently\?/);
+  assert.match(faq, /36 Core Multiplication Facts/);
+  assert.match(faq, /See the multiplication fact\. Recall the answer\./);
   assert.match(faq, /What is ChantCode\?/);
   assert.match(faq, /Does ChantCode require learning Chinese\?/);
 });
