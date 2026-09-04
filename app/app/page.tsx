@@ -4,7 +4,7 @@ import { SITE } from "../config";
 import { createPageMetadata } from "../seo";
 
 export const metadata = createPageMetadata({
-  title: "ChantCode App",
+  title: "Multiplication Learning App",
   description: "Learn about the ChantCode iOS app for rhythmic multiplication chants, focused recall practice, and multiplication fact fluency.",
   path: "/app",
 });
@@ -14,6 +14,8 @@ const appJsonLd = {
   "@type": "SoftwareApplication",
   name: "ChantCode",
   applicationCategory: "EducationalApplication",
+  applicationSubCategory: "multiplication fact learning",
+  educationalUse: ["multiplication fact learning", "multiplication fluency"],
   operatingSystem: "iOS",
   description: "An educational iOS app using rhythmic multiplication chants and focused recall practice to support multiplication fact fluency.",
   url: `${SITE.url}/app`,

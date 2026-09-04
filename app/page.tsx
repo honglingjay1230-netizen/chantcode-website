@@ -3,8 +3,8 @@ import { StoreButtons } from "./components/StoreButtons";
 import { createPageMetadata } from "./seo";
 
 export const metadata = createPageMetadata({
-  title: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory",
-  description: "ChantCode helps children build multiplication fact fluency through rhythmic multiplication chants and structured recall practice.",
+  title: "ChantCode | Rhythm-Based Multiplication Fact Learning",
+  description: "ChantCode is a rhythm-based multiplication learning system for practicing multiplication facts and times tables, designed to support automatic recall.",
   path: "/",
   absoluteTitle: true,
 });
@@ -23,7 +23,7 @@ export default function Home() {
           <h1 className="hero-main-title">ChantCode <em>— A Multiplication Code Stored in Sound</em></h1>
           <div className="hero-copy">
             <p className="eyebrow">Chant · Memory · Recall</p>
-            <p className="knowledge-lede">ChantCode uses rhythmic multiplication chants to help children build multiplication fact fluency and recall multiplication facts more naturally.</p>
+            <p className="knowledge-lede">ChantCode is a multiplication learning system that uses rhythm, spoken patterns, and recall practice to help children learn multiplication facts and times tables and work toward automatic recall.</p>
             <p>A <strong>chant</strong> turns information into a short sequence that can be repeated from memory. A <strong>code</strong> stores information in a compact form so it can be retrieved when needed.</p>
             <p className="hero-principle"><strong>Listen to the pattern. Store the fact. Retrieve the answer.</strong></p>
             <div className="hero-actions"><a className="primary-button" href="/about">What is ChantCode?</a><a className="secondary-button" href="/method">How it works</a></div>

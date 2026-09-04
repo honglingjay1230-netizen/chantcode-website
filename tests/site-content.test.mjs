@@ -3,7 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
-const pages = ["", "about/", "method/", "parents/", "guides/", "evidence/", "families/", "learning/", "book/", "faq/", "app/", "privacy/", "terms/", "support/"];
+const pages = ["", "about/", "method/", "parents/", "guides/", "evidence/", "families/", "family-testing/", "learning/", "book/", "faq/", "app/", "privacy/", "terms/", "support/"];
 
 test("includes every public knowledge page", async () => {
   for (const page of pages) await access(new URL(`app/${page}page.tsx`, root));
@@ -12,6 +12,10 @@ test("includes every public knowledge page", async () => {
 test("homepage explains ChantCode without exposing a web game", async () => {
   const home = await readFile(new URL("app/page.tsx", root), "utf8");
   assert.match(home, /A Multiplication Code Stored in Sound/);
+  assert.match(home, /ChantCode \| Rhythm-Based Multiplication Fact Learning/);
+  assert.match(home, /ChantCode is a multiplication learning system/);
+  assert.match(home, /multiplication facts and times tables/);
+  assert.match(home, /automatic recall/);
   assert.match(home, /36 core multiplication facts/);
   await assert.rejects(access(new URL("app/game/page.tsx", root)));
   await assert.rejects(access(new URL("public/game", root)));
@@ -159,10 +163,61 @@ test("family stories remain an honest empty state until real cases exist", async
   assert.match(data, /familyStories: FamilyStory\[\] = \[\]/);
 });
 
+test("family testing page is indexable, accurate, and included in discovery files", async () => {
+  const page = await readFile(new URL("dist/client/family-testing.html", root), "utf8");
+  const sitemap = await readFile(new URL("dist/client/sitemap.xml", root), "utf8");
+  const robots = await readFile(new URL("dist/client/robots.txt", root), "utf8");
+
+  assert.match(page, /<title>ChantCode Family Testing \| Free Multiplication App Testing for Ages 6–10<\/title>/);
+  assert.match(page, /<h1>Family Testing<\/h1>/);
+  assert.match(page, /children around ages 6–10/);
+  assert.match(page, /6 × 7 or 7 × 8/);
+  assert.match(page, /has not yet been officially released/);
+  assert.match(page, /honglingjay1230@gmail\.com/);
+  assert.match(page, /rel="canonical" href="https:\/\/chantcode\.com\/family-testing"/);
+  assert.doesNotMatch(page, /noindex/i);
+  assert.match(sitemap, /<loc>https:\/\/chantcode\.com\/family-testing<\/loc>/);
+  assert.match(robots, /^Allow: \/$/m);
+});
+
+test("major pages keep unique metadata, self-canonicals, and indexable initial HTML", async () => {
+  const majorPages = [
+    ["index.html", "https://chantcode.com"],
+    ["method.html", "https://chantcode.com/method"],
+    ["parents.html", "https://chantcode.com/parents"],
+    ["learning.html", "https://chantcode.com/learning"],
+    ["evidence.html", "https://chantcode.com/evidence"],
+    ["app.html", "https://chantcode.com/app"],
+    ["family-testing.html", "https://chantcode.com/family-testing"],
+  ];
+  const titles = [];
+  const descriptions = [];
+
+  for (const [file, canonical] of majorPages) {
+    const html = await readFile(new URL(`dist/client/${file}`, root), "utf8");
+    const title = html.match(/<title>(.*?)<\/title>/)?.[1] ?? "";
+    const description = html.match(/<meta name="description" content="([^"]+)"\/>/)?.[1] ?? "";
+
+    assert.ok(title, `${file} must have a title`);
+    assert.ok(description, `${file} must have a meta description`);
+    assert.match(html, new RegExp(`rel="canonical" href="${canonical.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
+    assert.match(html, /<meta property="og:title" content="[^"]+"\/>/);
+    assert.match(html, /<meta property="og:description" content="[^"]+"\/>/);
+    assert.match(html, /<main[^>]*>.*<h1[^>]*>/s);
+    assert.doesNotMatch(html, /<meta name="(?:robots|googlebot)" content="[^"]*noindex/i);
+    titles.push(title);
+    descriptions.push(description);
+  }
+
+  assert.equal(new Set(titles).size, majorPages.length);
+  assert.equal(new Set(descriptions).size, majorPages.length);
+});
+
 test("app schema identifies the verified platform without inventing a store URL", async () => {
   const app = await readFile(new URL("dist/client/app.html", root), "utf8");
   assert.match(app, /"@type":"SoftwareApplication"/);
   assert.match(app, /"applicationCategory":"EducationalApplication"/);
+  assert.match(app, /"educationalUse":\["multiplication fact learning","multiplication fluency"\]/);
   assert.match(app, /"operatingSystem":"iOS"/);
   assert.doesNotMatch(app, /"downloadUrl":""/);
 });

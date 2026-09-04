@@ -5,17 +5,17 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
-    default: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory",
+    default: "ChantCode | Rhythm-Based Multiplication Fact Learning",
     template: "%s | ChantCode",
   },
   description:
-    "ChantCode helps children build multiplication fact fluency through rhythmic multiplication chants and structured recall practice.",
+    "ChantCode is a rhythm-based multiplication learning system for practicing multiplication facts and times tables, designed to support automatic recall.",
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "ChantCode",
-    title: "ChantCode - Multiplication Fact Fluency Through Rhythm and Memory",
-    description: "Rhythmic multiplication chants and structured recall practice for children.",
+    title: "ChantCode | Rhythm-Based Multiplication Fact Learning",
+    description: "A rhythm-based multiplication learning system for practicing multiplication facts and times tables and supporting automatic recall.",
     url: "/",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "ChantCode — Master Multiplication Through Rhythm" }],
   },
@@ -40,6 +40,7 @@ const organizationJsonLd = {
   "@type": "Organization",
   name: "ChantCode",
   url: SITE.url,
+  description: "An educational project developing a rhythm-based multiplication learning app for children.",
   email: SITE.supportEmail,
   logo: `${SITE.url}/chantcode-app-icon.png`,
 };

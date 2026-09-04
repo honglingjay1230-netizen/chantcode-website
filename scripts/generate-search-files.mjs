@@ -15,6 +15,7 @@ const coreRoutes = [
   "/evidence/chinese-multiplication-learning-examples",
   "/evidence/language-and-multiplication-recall",
   "/families",
+  "/family-testing",
   "/faq",
   "/guides",
   "/learning",

@@ -2,7 +2,7 @@ import { SiteShell } from "../components/SiteShell";
 import { createPageMetadata } from "../seo";
 
 export const metadata = createPageMetadata({
-  title: "Learning Background & Evidence",
+  title: "Multiplication Learning Background & Evidence",
   description: "External sources and careful evidence boundaries for language, verbal memory, multiplication chants, retrieval practice, and ChantCode.",
   path: "/evidence",
 });

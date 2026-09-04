@@ -2,7 +2,7 @@ import { SiteShell } from "../components/SiteShell";
 import { createPageMetadata } from "../seo";
 
 export const metadata = createPageMetadata({
-  title: "Parent Guide",
+  title: "Multiplication Parent Guide",
   description: "Why multiplication fact recall can be difficult and how parents can support short, focused practice without replacing school mathematics.",
   path: "/parents",
 });

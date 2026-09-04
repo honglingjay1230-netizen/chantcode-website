@@ -52,6 +52,7 @@ export function SiteShell({ children }: { children: ReactNode }) {
           <a href="/guides">Guides</a>
           <a href="/evidence">Evidence</a>
           <a href="/families">Family Stories</a>
+          <a href="/family-testing">Family Testing</a>
           <a href="/privacy">Privacy Policy</a>
           <a href="/terms">Terms of Use</a>
           <a href="/support">Support</a>
