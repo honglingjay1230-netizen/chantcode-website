@@ -15,10 +15,18 @@ function StoreLink({ href, label, compact }: { href: string; label: string; comp
   );
 }
 
-export function StoreButtons({ compact = false }: { compact?: boolean }) {
+export function StoreButtons({ compact = false, showQr = false }: { compact?: boolean; showQr?: boolean }) {
   return (
     <div className="store-buttons">
-      <StoreLink href={SITE.appStoreUrl} label="Download on the App Store" compact={compact} />
+      <div className={`store-download-option${compact ? " compact" : ""}`}>
+        <StoreLink href={SITE.appStoreUrl} label="Download on the App Store" compact={compact} />
+        {showQr && SITE.appStoreUrl ? (
+          <a className="app-store-qr" href={SITE.appStoreUrl} aria-label="Open ChantCode in the App Store">
+            <img src="/chantcode-app-store-qr.png" alt="QR code for the official ChantCode App Store download page" />
+            <span>Scan to download</span>
+          </a>
+        ) : null}
+      </div>
       <StoreLink href={SITE.googlePlayUrl} label="Get it on Google Play" compact={compact} />
     </div>
   );

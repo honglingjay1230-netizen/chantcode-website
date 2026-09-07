@@ -58,7 +58,7 @@ export default function Home() {
 
         <section className="section app-intro-section">
           <div><p className="eyebrow">The ChantCode App</p><h2>Structured multiplication practice for children</h2><p>The app brings together rhythmic chants, visual guidance, prompted recall, independent recall, and practice challenges in one focused learning sequence.</p><a className="primary-link" href="/app">Learn about the app <span aria-hidden="true">→</span></a></div>
-          <div><img src="/chantcode-app-icon.png" alt="ChantCode Multiplication app icon" /><p>Available on</p><StoreButtons compact /></div>
+          <div><img src="/chantcode-app-icon.png" alt="ChantCode Multiplication app icon" /><p>Available on</p><StoreButtons compact showQr /></div>
         </section>
       </main>
     </SiteShell>

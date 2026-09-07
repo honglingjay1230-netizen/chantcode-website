@@ -230,8 +230,12 @@ test("app page and schema use the verified App Store listing", async () => {
   assert.match(app, /"educationalUse":\["multiplication fact learning","multiplication fluency"\]/);
   assert.match(app, /"operatingSystem":"iOS"/);
   assert.match(app, /"downloadUrl":"https:\/\/apps\.apple\.com\/app\/id6799623130"/);
-  assert.match(app, /Download ChantCode on the App Store/);
+  assert.match(app, /Scan to download/);
   assert.match(app, /href="https:\/\/apps\.apple\.com\/app\/id6799623130"/);
   assert.match(app, /src="\/chantcode-app-store-qr\.png"/);
   await access(new URL("public/chantcode-app-store-qr.png", root));
+
+  const home = await readFile(new URL("dist/client/index.html", root), "utf8");
+  assert.match(home, /Download on the App Store/);
+  assert.match(home, /src="\/chantcode-app-store-qr\.png"/);
 });

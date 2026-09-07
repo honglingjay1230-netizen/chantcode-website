@@ -58,13 +58,18 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
 .hero-definition p:first-child { color: var(--ink); font-weight: 800; }
 .hero-definition p:last-child { margin-bottom: 0; color: var(--ink); }
 .hero-definition strong { color: var(--ink); }
-.store-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+.store-buttons { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 12px; }
 .store-button { min-width: 190px; min-height: 66px; display: flex; flex-direction: column; justify-content: center; padding: 12px 18px; border: 2px solid var(--navy); border-radius: 17px; background: var(--navy); color: white; text-decoration: none; transition: transform .2s, background .2s; }
 .store-button:not(.disabled):hover { transform: translateY(-2px); background: var(--blue-dark); border-color: var(--blue-dark); }
 .store-button small { font-size: .7rem; opacity: .76; }
 .store-button strong { font-size: 1rem; }
 .store-button.disabled { cursor: default; background: var(--surface); border-color: var(--line); color: #77829a; }
 .store-button.compact { min-width: 165px; min-height: 58px; }
+.store-download-option { flex: 0 0 190px; display: grid; gap: 12px; }
+.store-download-option.compact { flex-basis: 165px; }
+.store-download-option .store-button { width: 100%; min-width: 0; }
+.app-store-qr { width: 100%; display: grid; justify-items: center; gap: 8px; padding: 12px; border: 1px solid #dce8fb; border-radius: 20px; background: white; color: var(--blue-dark); font-size: .72rem; font-weight: 900; letter-spacing: .04em; text-decoration: none; box-shadow: 0 14px 32px rgba(31, 70, 132, .1); }
+.app-store-qr img { display: block; width: 100%; border-radius: 8px; }
 .hero-visual { position: relative; display: flex; flex-direction: column; align-items: center; }
 .icon-halo { width: min(100%, 510px); }
 .icon-halo img { width: 100%; display: block; border-radius: 24%; }
@@ -298,12 +303,6 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
 .app-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .app-features article { padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
 .app-features h2 { font-size: 1.6rem; }
-.app-download-section { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: clamp(38px, 8vw, 90px); margin-top: 54px; padding: clamp(34px, 6vw, 62px); border-radius: var(--radius-lg); background: linear-gradient(145deg, #eef5ff, #f7f4ff); }
-.app-download-section > div { max-width: 630px; }
-.app-download-section h2 { font-size: clamp(2rem, 4vw, 3rem); }
-.app-store-direct-link { width: fit-content; margin-top: 12px; }
-.app-store-qr { display: block; padding: 14px; border: 1px solid #dce8fb; border-radius: 24px; background: white; box-shadow: 0 18px 42px rgba(31, 70, 132, .1); }
-.app-store-qr img { display: block; width: min(240px, 42vw); border-radius: 12px; }
 .app-availability { margin-top: 32px; text-align: center; }
 
 /* Parent guides, evidence, and real-family content */
@@ -402,8 +401,7 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
   .guide-grid { grid-template-columns: 1fr; }
   .guide-cta { align-items: flex-start; flex-direction: column; }
   .knowledge-grid, .reassurance-grid { grid-template-columns: 1fr; }
-  .fact-section, .app-intro-section, .book-hero, .app-page-hero, .app-download-section { grid-template-columns: 1fr; }
-  .app-store-qr { justify-self: center; }
+  .fact-section, .app-intro-section, .book-hero, .app-page-hero { grid-template-columns: 1fr; }
   .learning-count { grid-template-columns: 1fr; }
   .learning-count > strong { text-align: left; }
   .learning-path > div { grid-template-columns: 1fr 1fr; }
@@ -417,7 +415,9 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
   .section { padding-block: 68px; }
   h1 { font-size: 3.05rem; }
   h2 { font-size: 2.35rem; }
-  .store-buttons, .store-button { width: 100%; }
+  .store-buttons, .store-button, .store-download-option { width: 100%; }
+  .store-download-option { flex-basis: 100%; }
+  .app-store-qr { width: min(190px, 100%); justify-self: center; }
   .icon-halo { width: min(92vw, 430px); }
   .concept-image { width: 100%; margin-top: 16px; }
   .feature-grid { grid-template-columns: 1fr; }
@@ -461,9 +461,6 @@ p { color: var(--muted); line-height: 1.75; overflow-wrap: break-word; }
   .knowledge-hero { padding-top: 52px; }
   .hero-actions, .primary-button, .secondary-button { width: 100%; }
   .learning-path > div, .app-features { grid-template-columns: 1fr; }
-  .app-download-section { margin-inline: -14px; border-radius: 0; }
-  .app-store-direct-link { width: 100%; }
-  .app-store-qr img { width: min(240px, 70vw); }
   .book-cover { width: min(100%, 360px); justify-self: center; }
   .article-card { min-height: 0; padding: 26px 24px; }
   .article-content > section { padding-block: 36px 22px; }
