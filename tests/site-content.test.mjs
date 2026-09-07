@@ -111,6 +111,8 @@ test("Pages middleware blocks only mainland China and selected crawler purposes"
   const middleware = await import(new URL("../functions/_middleware.js", import.meta.url));
   const { isBlockedCrawlerRequest, isMainlandChinaRequest, onRequest } = middleware;
   const requestFor = (country, userAgent = "Mozilla/5.0") => ({
+    url: "https://chantcode.com/",
+    method: "GET",
     cf: { country },
     headers: new Headers({ "user-agent": userAgent }),
   });
@@ -221,11 +223,15 @@ test("major pages keep unique metadata, self-canonicals, and indexable initial H
   assert.equal(new Set(descriptions).size, majorPages.length);
 });
 
-test("app schema identifies the verified platform without inventing a store URL", async () => {
+test("app page and schema use the verified App Store listing", async () => {
   const app = await readFile(new URL("dist/client/app.html", root), "utf8");
   assert.match(app, /"@type":"SoftwareApplication"/);
   assert.match(app, /"applicationCategory":"EducationalApplication"/);
   assert.match(app, /"educationalUse":\["multiplication fact learning","multiplication fluency"\]/);
   assert.match(app, /"operatingSystem":"iOS"/);
-  assert.doesNotMatch(app, /"downloadUrl":""/);
+  assert.match(app, /"downloadUrl":"https:\/\/apps\.apple\.com\/app\/id6799623130"/);
+  assert.match(app, /Download ChantCode on the App Store/);
+  assert.match(app, /href="https:\/\/apps\.apple\.com\/app\/id6799623130"/);
+  assert.match(app, /src="\/chantcode-app-store-qr\.png"/);
+  await access(new URL("public/chantcode-app-store-qr.png", root));
 });

@@ -1,6 +1,6 @@
 export const SITE = {
   url: "https://chantcode.com",
   supportEmail: "support@chantcode.com",
-  appStoreUrl: "",
+  appStoreUrl: "https://apps.apple.com/app/id6799623130",
   googlePlayUrl: "",
 } as const;
