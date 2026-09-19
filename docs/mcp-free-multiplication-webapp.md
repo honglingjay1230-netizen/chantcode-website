@@ -93,11 +93,14 @@ Implementation lives in `web-adaptations/manual-follow-along.js` and `.css`; `sc
 ### Review release — published and verified
 
 - Production: https://chantcode.com/free-multiplication
-- Deployment: https://be7b7f82.chantcode-website.pages.dev (Pages production branch main).
-- Website feature commit: f810965; pushed to origin/website/free-multiplication-20260919. Main Git branch was deliberately not overwritten and no history was rebuilt.
+- Deployment: https://bca9eb64.chantcode-website.pages.dev (Pages production branch main).
+- Website feature commit: f810965; final preload fix: 75041c8; pushed to origin/website/free-multiplication-20260919. Main Git branch was deliberately not overwritten and no history was rebuilt.
 - Previous production deployment: https://ffa373dd.chantcode-website.pages.dev (rollback reference).
 - Direct production upload retained the existing local Functions bundle and configuration; unrelated backend changes were not added to the feature commit.
 - Production browser regression passed: resumed chant 2 after reload, completed 4/4 manual practice, unchanged mastery storage, accurate parent counts, standalone download link, shared-origin storage, storage-failure alert, reset cleanup, and 320/390/768px no horizontal overflow. Zero page errors in this test.
 - Public URL checks confirmed new heading, new modules/images, noindex headers and continued sitemap exclusion.
 - Original prebuilt App source was rechecked against the import manifest: all 205 hashes unchanged. No original App compilation, payment migration, or DNS change.
 - Real iPhone/Safari testing and educational review of every AI-generated audio clip remain outside this automated verification.
+
+- Final browser run also asserts that the original 1.85 MB welcome PNG is not fetched; the HTML preload now targets the optimized WebP. Production formal-test regression also passed all 7 questions with saved results after reload.
+- If Git HTTPS stalls in this network, process-scoped HTTP/1.1 plus the existing proxy succeeded; no global Git or proxy settings were changed.
