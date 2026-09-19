@@ -89,3 +89,15 @@ Implementation lives in `web-adaptations/manual-follow-along.js` and `.css`; `sc
 - Local build and 11 content tests passed. Browser test passed resume, separate mastery, parent counts, shared-origin storage, standalone links, simulated quota failure, reset and 320/390/768px no-overflow checks.
 - Reproducible browser check: install Playwright, build website, then `node tests/web-resource.browser.cjs`. Uses Edge on Windows or bundled Chromium elsewhere. Set CHECK_URL to audit a deployment. BROWSER_PATH and BROWSER_PROXY are optional process-scoped settings. Uses disposable browser contexts only.
 - Git scope intentionally excludes pre-existing payment/referral/server/package changes. Preserve those existing deployment requirements separately; this feature branch alone is not a complete snapshot of the unrelated production referral backend. Do not auto-deploy an old backend over production.
+
+### Review release — published and verified
+
+- Production: https://chantcode.com/free-multiplication
+- Deployment: https://be7b7f82.chantcode-website.pages.dev (Pages production branch main).
+- Website feature commit: f810965; pushed to origin/website/free-multiplication-20260919. Main Git branch was deliberately not overwritten and no history was rebuilt.
+- Previous production deployment: https://ffa373dd.chantcode-website.pages.dev (rollback reference).
+- Direct production upload retained the existing local Functions bundle and configuration; unrelated backend changes were not added to the feature commit.
+- Production browser regression passed: resumed chant 2 after reload, completed 4/4 manual practice, unchanged mastery storage, accurate parent counts, standalone download link, shared-origin storage, storage-failure alert, reset cleanup, and 320/390/768px no horizontal overflow. Zero page errors in this test.
+- Public URL checks confirmed new heading, new modules/images, noindex headers and continued sitemap exclusion.
+- Original prebuilt App source was rechecked against the import manifest: all 205 hashes unchanged. No original App compilation, payment migration, or DNS change.
+- Real iPhone/Safari testing and educational review of every AI-generated audio clip remain outside this automated verification.
