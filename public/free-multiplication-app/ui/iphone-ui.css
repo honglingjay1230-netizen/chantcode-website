@@ -1,0 +1,529 @@
+/* Phone-first responsive UI shared by iPhone and iPad. */
+:root { --cc-page: 720px; --cc-touch: 48px; }
+html[data-apple-ui="iphone"] body { background: #fff; }
+html[data-apple-ui="iphone"] .topbar-inner,
+html[data-apple-ui="iphone"] .standalone-home-tool .topbar-inner {
+  width: 100%;
+  flex-direction: row;
+  gap: 0;
+  padding: calc(4px + env(safe-area-inset-top)) 8px 2px;
+}
+html[data-apple-ui="iphone"] .brand-lockup { min-height: 64px; font-size: 11px; }
+html[data-apple-ui="iphone"] .mode-tools { width: 100%; grid-template-columns: repeat(5, minmax(0,1fr)); }
+html[data-apple-ui="iphone"] .mode-home-button {
+  min-height: 64px;
+  flex-direction: column;
+  gap: 3px;
+  padding: 5px 2px 7px;
+  font-size: 11px;
+}
+html[data-apple-ui="iphone"] .mode-icon,
+html[data-apple-ui="iphone"] .mode-icon svg { width: 23px; height: 23px; }
+html[data-apple-ui="iphone"] .page {
+  width: calc(100% - 24px);
+  padding: 16px 0 calc(38px + env(safe-area-inset-bottom));
+}
+html[data-apple-ui="iphone"] .page.child-home-page {
+  width: 100%;
+  max-width: none;
+}
+html[data-apple-ui="iphone"] .has-child-home-control .page { padding-top: 16px; }
+html[data-apple-ui="iphone"] .page-head { margin-bottom: 22px; }
+html[data-apple-ui="iphone"] .page-head h1 { font-size: clamp(29px, 8vw, 40px); }
+html[data-apple-ui="iphone"] .page-head p { font-size: 15px; line-height: 1.58; }
+
+/* iPhone home mirrors supplied reference image: tall hero, stacked cards. */
+html[data-apple-ui="iphone"] .cc-home-screen { max-width: 760px; margin: 0 auto; }
+html[data-apple-ui="iphone"] .cc-home-hero-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(145px, .82fr);
+  align-items: end;
+  min-height: 520px;
+  padding: 30px 26px 18px;
+}
+html[data-apple-ui="iphone"] .cc-home-hero-card h1 { font-size: clamp(34px, 9.5vw, 53px); max-width: 520px; }
+html[data-apple-ui="iphone"] .cc-home-lead { font-size: 15px !important; }
+html[data-apple-ui="iphone"] .about-visual { align-self: end; margin-right: -18px; margin-bottom: -18px; }
+html[data-apple-ui="iphone"] .about-icon-halo { aspect-ratio: 1 / .78; }
+html[data-apple-ui="iphone"] .about-icon-halo img { transform: scale(1.22); transform-origin: 52% 22%; }
+html[data-apple-ui="iphone"] .cc-hero-note-one { top: 12%; left: -5%; font-size: 26px; }
+html[data-apple-ui="iphone"] .cc-hero-note-two { right: 5%; bottom: 21%; font-size: 23px; }
+html[data-apple-ui="iphone"] .cc-sound-path { max-width: 520px; }
+/* Portrait phone: every route becomes a single comfortable reading column. */
+html[data-apple-ui="iphone"] .about-chantcode:not(.cc-home-screen),
+html[data-apple-ui="iphone"] .about-layout,
+html[data-apple-ui="iphone"] .selection-landscape-layout,
+html[data-apple-ui="iphone"] .lesson-landscape-layout,
+html[data-apple-ui="iphone"] .task-selection-layout,
+html[data-apple-ui="iphone"] .full-product-layout,
+html[data-apple-ui="iphone"] .progress-overview-head,
+html[data-apple-ui="iphone"] .usage-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+html[data-apple-ui="iphone"] .about-visual { min-width: 0; }
+html[data-apple-ui="iphone"] .group-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 10px; }
+html[data-apple-ui="iphone"] .foundation-group-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+html[data-apple-ui="iphone"] .group-card { min-height: 205px; padding: 17px; }
+html[data-apple-ui="iphone"] .group-card strong { font-size: 64px; }
+html[data-apple-ui="iphone"] .group-card span { font-size: 17px; }
+html[data-apple-ui="iphone"] .lesson-steps {
+  grid-template-columns: repeat(5, minmax(112px,1fr));
+  margin-bottom: 18px;
+}
+html[data-apple-ui="iphone"] .lesson-steps.lesson-steps-2,
+html[data-apple-ui="iphone"] .lesson-steps.lesson-steps-4 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+html[data-apple-ui="iphone"] .lesson-steps.lesson-steps-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+html[data-apple-ui="iphone"] .lesson-copy-panel,
+html[data-apple-ui="iphone"] .lesson-action-panel,
+html[data-apple-ui="iphone"] .selection-overview-panel,
+html[data-apple-ui="iphone"] .selection-groups-panel { overflow: visible; max-height: none; }
+html[data-apple-ui="iphone"] .chant-board,
+html[data-apple-ui="iphone"] .recite-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+html[data-apple-ui="iphone"] .foundation-board { grid-template-columns: repeat(2,minmax(0,1fr)); }
+html[data-apple-ui="iphone"] .practice-grid,
+html[data-apple-ui="iphone"] .challenge-grid { grid-template-columns: 1fr; }
+html[data-apple-ui="iphone"] .choice-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px; }
+html[data-apple-ui="iphone"] .quiz-card { padding: 26px 18px; }
+html[data-apple-ui="iphone"] .quiz-card h1 { font-size: clamp(48px,16vw,72px); }
+html[data-apple-ui="iphone"] .listen-choose-start {
+  display: block;
+  max-width: 100%;
+  text-align: center;
+}
+html[data-apple-ui="iphone"] .listen-choose-start h1 {
+  margin: 16px 0 18px;
+  font-size: clamp(34px, 8vw, 58px);
+  line-height: 1.1;
+  white-space: normal;
+}
+html[data-apple-ui="iphone"] .listen-choose-start p {
+  margin: 0 auto;
+  max-width: 34rem;
+}
+html[data-apple-ui="iphone"] .listen-choose-start > .primary {
+  display: block;
+  width: min(100%, 360px);
+  margin: 24px auto 0;
+}
+html[data-apple-ui="iphone"] .usage-section { padding: 23px 19px; }
+html[data-apple-ui="iphone"] .usage-equations { grid-template-columns: repeat(2,minmax(0,1fr)); }
+html[data-apple-ui="iphone"] .progress-overview-head .progress-confirmation-copy { grid-column: auto; text-align: left; }
+html[data-apple-ui="iphone"] .progress-legend { justify-content: flex-start; }
+html[data-apple-ui="iphone"] .trial-scope { grid-template-columns: 1fr; }
+html[data-apple-ui="iphone"] .support-option { padding: 20px 16px; }
+html[data-apple-ui="iphone"] .support-actions { display: grid; grid-template-columns: 1fr 1fr; }
+html[data-apple-ui="iphone"] .support-actions button { width: 100%; }
+html[data-apple-ui="iphone"] .action-row { display: grid; grid-template-columns: 1fr; gap: 9px; }
+html[data-apple-ui="iphone"] .action-row button { width: 100%; }
+html[data-apple-ui="iphone"] .handoff-screen,
+html[data-apple-ui="iphone"] .result-screen { margin-top: 2vh; padding: 32px 20px; }
+html[data-apple-ui="iphone"] .handoff-screen h1,
+html[data-apple-ui="iphone"] .result-screen h1 { font-size: 32px; }
+html[data-apple-ui="iphone"] .core-table-scroll { margin-inline: -2px; }
+html[data-apple-ui="iphone"] .more-section { margin-top: 26px; }
+
+@media (max-width: 500px) {
+  html[data-apple-ui="iphone"] .cc-home-hero-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    padding: 28px 22px 0;
+  }
+  html[data-apple-ui="iphone"] .about-visual {
+    width: 78%;
+    justify-self: end;
+    margin-top: -14px;
+    margin-right: -12px;
+  }
+  html[data-apple-ui="iphone"] .cc-home-hero-card .about-actions { grid-template-columns: 1fr 1fr; }
+  html[data-apple-ui="iphone"] .cc-sound-path { margin-top: 20px; gap: 4px; }
+  html[data-apple-ui="iphone"] .cc-path-icon { width: 43px; height: 43px; }
+  html[data-apple-ui="iphone"] .cc-trial-banner { grid-template-columns: auto 1fr; }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  html[data-apple-ui="iphone"] .topbar-inner { flex-direction: row; padding-top: env(safe-area-inset-top); }
+  html[data-apple-ui="iphone"] .brand-lockup { display: flex; }
+  html[data-apple-ui="iphone"] .mode-home-button { min-height: 58px; }
+  html[data-apple-ui="iphone"] .page { padding-top: 12px; }
+  html[data-apple-ui="iphone"] .lesson-landscape-layout,
+  html[data-apple-ui="iphone"] .selection-landscape-layout,
+  html[data-apple-ui="iphone"] .task-selection-layout { grid-template-columns: minmax(260px,.78fr) minmax(0,1.22fr); align-items: start; }
+  html[data-apple-ui="iphone"] .chant-board,
+  html[data-apple-ui="iphone"] .recite-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+
+/* Final single responsive Apple UI: iPhone-first, reused on iPad. */
+html[data-apple-ui="iphone"] .cc-home-screen {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+html[data-apple-ui="iphone"] .cc-home-hero-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  min-height: 0;
+  padding: 18px 16px 20px;
+  overflow: visible;
+}
+
+html[data-apple-ui="iphone"] .cc-home-visual-stack {
+  order: -1;
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+html[data-apple-ui="iphone"] .cc-home-app-art {
+  display: block;
+  width: min(100%, 520px);
+  height: auto;
+  object-fit: contain;
+  border-radius: 26px;
+}
+
+html[data-apple-ui="iphone"] .cc-home-formula-art {
+  display: block;
+  width: min(100%, 580px);
+  height: auto;
+  object-fit: contain;
+}
+
+html[data-apple-ui="iphone"] .cc-home-hero-card .about-copy {
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+html[data-apple-ui="iphone"] .cc-home-hero-card h1 {
+  max-width: none;
+  font-size: clamp(34px, 9vw, 50px);
+}
+
+html[data-apple-ui="iphone"] .cc-home-lead {
+  max-width: none;
+  font-size: 15px !important;
+}
+
+html[data-apple-ui="iphone"] .cc-home-hero-card .about-actions {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 20px;
+}
+
+html[data-apple-ui="iphone"] .cc-trial-banner,
+html[data-apple-ui="iphone"] .cc-home-disclaimer {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html[data-apple-ui="iphone"] .cc-sound-path,
+html[data-apple-ui="iphone"] .about-visual,
+html[data-apple-ui="iphone"] .overview-landscape-entry {
+  display: none !important;
+}
+
+html[data-apple-ui="iphone"] .child-home-route-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+html[data-apple-ui="iphone"] .tower-route-card {
+  background: linear-gradient(145deg, #eef6ff, #f7f2ff);
+  border-color: #c9d8f7;
+}
+
+html[data-apple-ui="iphone"] .tower-route-card strong {
+  color: #5a44b8;
+  font-size: 58px;
+}
+
+html[data-apple-ui="iphone"] .child-home-route-grid .tower-route-card:nth-child(3) {
+  grid-column: 1 / -1;
+}
+
+html[data-apple-ui="iphone"] .why36-page {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+html[data-apple-ui="iphone"] .why36-summary-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+html[data-apple-ui="iphone"] .why36-summary-card {
+  padding: 18px;
+  border: 1px solid #e2ebf7;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(26, 57, 102, .06);
+}
+
+html[data-apple-ui="iphone"] .why36-summary-card small {
+  display: block;
+  color: #647695;
+  font-weight: 800;
+}
+
+html[data-apple-ui="iphone"] .why36-summary-card strong {
+  display: block;
+  margin: 5px 0;
+  color: #0b214b;
+  font-size: 34px;
+}
+
+html[data-apple-ui="iphone"] .why36-summary-card p {
+  margin: 0;
+  color: #52627f;
+  line-height: 1.55;
+}
+
+html[data-apple-ui="iphone"] .why36-table-card {
+  margin-top: 0;
+}
+
+html[data-apple-ui="iphone"] .why36-explanation {
+  display: grid;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+html[data-apple-ui="iphone"] .why36-explanation article {
+  display: grid;
+  grid-template-columns: 38px 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid #e6edf7;
+  border-radius: 16px;
+  background: #fff;
+}
+
+html[data-apple-ui="iphone"] .why36-explanation article > span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  background: #0f6fff;
+  font-weight: 900;
+}
+
+html[data-apple-ui="iphone"] .why36-explanation h3 {
+  margin: 0 0 4px;
+  color: #0b214b;
+}
+
+html[data-apple-ui="iphone"] .why36-explanation p {
+  margin: 0;
+  color: #5c6b87;
+  line-height: 1.5;
+}
+
+html[data-apple-ui="iphone"] .why36-actions {
+  margin-top: 16px;
+}
+
+@media (max-width: 500px) {
+  html[data-apple-ui="iphone"] .cc-home-hero-card {
+    padding: 14px 12px 18px;
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-app-art {
+    width: 100%;
+    border-radius: 22px;
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-formula-art {
+    width: 100%;
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-hero-card .about-actions {
+    grid-template-columns: 1fr;
+  }
+
+  html[data-apple-ui="iphone"] .cc-parent-guide-button {
+    grid-column: auto;
+  }
+}
+
+/* iPad keeps the exact same card structure and interaction model, with wider breathing room only. */
+@media (min-width: 768px) {
+  :root { --cc-page: 860px; }
+
+  html[data-apple-ui="iphone"] .topbar-inner,
+  html[data-apple-ui="iphone"] .standalone-home-tool .topbar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  html[data-apple-ui="iphone"] .page {
+    width: min(860px, calc(100% - 48px));
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-screen,
+  html[data-apple-ui="iphone"] .why36-page {
+    max-width: 820px;
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-hero-card {
+    padding: 26px 28px 30px;
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-app-art {
+    width: min(74%, 560px);
+  }
+
+  html[data-apple-ui="iphone"] .cc-home-formula-art {
+    width: min(82%, 640px);
+  }
+
+  html[data-apple-ui="iphone"] .child-home-route-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  html[data-apple-ui="iphone"] .child-home-route-grid .tower-route-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  html[data-apple-ui="iphone"] .group-card {
+    min-height: 210px;
+  }
+
+  html[data-apple-ui="iphone"] .why36-summary-grid {
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+/* iPad 竖屏：所有乘法表按可用宽度等比例收进一屏，保留原内容与交互。 */
+@media (orientation: portrait) and (min-width: 768px) and (max-width: 1194px) {
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-table-scroll,
+  html[data-apple-ui="iphone"] .multiplication-table-surface .home-table-scroll {
+    overflow-x: hidden;
+  }
+
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-table {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: clamp(4px, .65vw, 8px);
+  }
+
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-column {
+    min-width: 0;
+    gap: clamp(3px, .5vw, 6px);
+  }
+
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-column > span,
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-column > .core-fact-trigger {
+    min-width: 0;
+    min-height: clamp(38px, 5.2vw, 46px);
+    padding: clamp(4px, .7vw, 7px) 2px;
+    border-radius: clamp(8px, 1.15vw, 12px);
+    font-size: clamp(11px, 1.55vw, 14px);
+    line-height: 1.1;
+  }
+
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-column strong,
+  html[data-apple-ui="iphone"] .multiplication-table-surface .core-group-trigger,
+  html[data-apple-ui="iphone"] .multiplication-table-surface .progress-group-confirm {
+    width: clamp(42px, 5.8vw, 52px);
+    height: clamp(42px, 5.8vw, 52px);
+    font-size: clamp(20px, 2.9vw, 25px);
+  }
+}
+
+/* 启动欢迎页：九比十六原图始终完整显示，横竖屏均不裁切。 */
+.welcome-screen {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #fff;
+  touch-action: manipulation;
+}
+
+.welcome-art {
+  position: relative;
+  width: min(100vw, 56.279dvh);
+  aspect-ratio: 941 / 1672;
+  flex: 0 0 auto;
+}
+
+.welcome-art > img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.welcome-start {
+  position: absolute;
+  z-index: 1;
+  top: 83.9%;
+  left: 8.8%;
+  width: 82.4%;
+  height: 10.5%;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.welcome-start:focus-visible {
+  outline: 4px solid rgba(15, 111, 255, .38);
+  outline-offset: 3px;
+}
+
+.welcome-start:active {
+  background: rgba(255, 255, 255, .14);
+}
+
+@media (orientation: landscape) {
+  .welcome-screen {
+    background: linear-gradient(90deg, #f5faff, #fff 28%, #fff 72%, #faf7ff);
+  }
+
+  .welcome-art {
+    box-shadow: 0 0 48px rgba(28, 111, 238, .08);
+  }
+}
+
+/* 首页完整乘法音乐试听用尽后，所有 iPhone / iPad 方向都保留清晰的解锁入口。 */
+html[data-apple-ui="iphone"] .child-home-overview .overview-preview-feedback.is-exhausted .core-table-note {
+  display: block;
+  margin-top: 12px;
+  padding-inline: 12px;
+  font-size: clamp(12px, 1.8vw, 14px);
+}
+
+html[data-apple-ui="iphone"] .child-home-overview .overview-unlock-full {
+  width: fit-content;
+  max-width: calc(100% - 24px);
+  min-height: 44px;
+  margin-inline: auto;
+}

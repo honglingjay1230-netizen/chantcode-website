@@ -3,7 +3,7 @@ import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
-const pages = ["", "about/", "method/", "parents/", "guides/", "evidence/", "families/", "family-testing/", "learning/", "book/", "faq/", "app/", "privacy/", "terms/", "support/"];
+const pages = ["", "about/", "method/", "parents/", "guides/", "evidence/", "families/", "family-testing/", "free-multiplication/", "learning/", "book/", "faq/", "app/", "privacy/", "terms/", "support/"];
 
 test("includes every public knowledge page", async () => {
   for (const page of pages) await access(new URL(`app/${page}page.tsx`, root));
@@ -190,7 +190,7 @@ test("family testing page is indexable, accurate, and included in discovery file
   assert.match(robots, /^Allow: \/$/m);
 });
 
-test("major pages keep unique metadata, self-canonicals, and indexable initial HTML", async () => {
+test("major pages keep unique metadata and correct per-page indexing rules", async () => {
   const majorPages = [
     ["index.html", "https://chantcode.com"],
     ["method.html", "https://chantcode.com/method"],
@@ -199,6 +199,7 @@ test("major pages keep unique metadata, self-canonicals, and indexable initial H
     ["evidence.html", "https://chantcode.com/evidence"],
     ["app.html", "https://chantcode.com/app"],
     ["family-testing.html", "https://chantcode.com/family-testing"],
+    ["free-multiplication.html", "https://chantcode.com/free-multiplication"],
   ];
   const titles = [];
   const descriptions = [];
@@ -214,7 +215,11 @@ test("major pages keep unique metadata, self-canonicals, and indexable initial H
     assert.match(html, /<meta property="og:title" content="[^"]+"\/>/);
     assert.match(html, /<meta property="og:description" content="[^"]+"\/>/);
     assert.match(html, /<main[^>]*>.*<h1[^>]*>/s);
-    assert.doesNotMatch(html, /<meta name="(?:robots|googlebot)" content="[^"]*noindex/i);
+    if (file === "free-multiplication.html") {
+      assert.match(html, /<meta name="robots" content="[^"]*noindex/i);
+    } else {
+      assert.doesNotMatch(html, /<meta name="(?:robots|googlebot)" content="[^"]*noindex/i);
+    }
     titles.push(title);
     descriptions.push(description);
   }

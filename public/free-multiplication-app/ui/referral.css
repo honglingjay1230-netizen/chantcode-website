@@ -1,0 +1,7 @@
+/* Parent-only referral module. No learning or entitlement layout selectors. */
+.referral-card .referral-code { display: block; font: 700 clamp(20px, 4vw, 28px)/1.5 ui-monospace, monospace; overflow-wrap: anywhere; user-select: text; -webkit-user-select: text; margin: 14px 0; }
+.referral-entry { margin: 18px 0; }
+.referral-entry label { display: block; margin-bottom: 8px; }
+.referral-entry input { min-width: 0; width: min(100%, 280px); border: 1px solid #b9c8df; border-radius: 12px; padding: 12px; font: inherit; text-transform: uppercase; }
+.referral-entry [hidden] { display: none !important; }
+.referral-card .action-row { flex-wrap: wrap; }
