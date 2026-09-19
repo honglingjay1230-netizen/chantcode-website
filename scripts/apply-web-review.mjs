@@ -36,6 +36,7 @@ export async function applyWebReview(runtime) {
   }
   const indexPath=resolve(runtime,'index.html');let html=await readFile(indexPath,'utf8');
   html=html.replace(/ui\/app\.js\?v=[^"]+/, 'ui/app.js?v=20260919-review1').replace(/ui\/web-follow-along\.css(?:\?v=[^"]+)?/, 'ui/web-follow-along.css?v=20260919-review1');
+  html=html.replaceAll('chantcode-welcome.png','chantcode-welcome.webp');
   await writeFile(indexPath,html);
 
 }
